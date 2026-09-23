@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, X } from "lucide-react";
 
@@ -27,9 +28,15 @@ export default function Navbar() {
     <>
       <header className="nav">
         <Link href="/" className="brand" aria-label="Raptor Staffing Solutions">
-          <span>R</span>
-          <div>
-            <b>Raptor</b> Staffing
+          <div className="brand-logo-wrap">
+            <Image
+              src="/logo.png"
+              alt="Raptor Staffing Solutions"
+              width={105}
+              height={52}
+              priority
+              className="brand-logo"
+            />
           </div>
         </Link>
 
@@ -76,10 +83,17 @@ export default function Navbar() {
                 href="/"
                 className="brand"
                 onClick={() => setMobileOpen(false)}
+                aria-label="Raptor Staffing Solutions"
               >
-                <span>R</span>
-                <div>
-                  <b>Raptor</b> Staffing
+                <div className="brand-logo-wrap">
+                  <Image
+                    src="/logo.png"
+                    alt="Raptor Staffing Solutions"
+                    width={100}
+                    height={50}
+                    priority
+                    className="brand-logo"
+                  />
                 </div>
               </Link>
               <button

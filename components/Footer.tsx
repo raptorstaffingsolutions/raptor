@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Building2, MapPin, Mail, Phone, ShieldCheck, ArrowRight } from "lucide-react";
 
 export default function Footer() {
@@ -6,10 +7,16 @@ export default function Footer() {
     <footer>
       <div className="footer-grid">
         <div className="footer-brand">
-          <Link href="/" className="brand" style={{ color: "#fff" }}>
-            <span>R</span>
-            <div>
-              <b style={{ color: "#a78bfa" }}>Raptor</b> Staffing
+          <Link href="/" className="brand" aria-label="Raptor Staffing Solutions">
+            <div className="brand-logo-wrap" style={{ background: "rgba(11,13,23,0.7)", padding: "6px 12px" }}>
+              <Image
+                src="/logo.png"
+                alt="Raptor Staffing Solutions"
+                width={140}
+                height={70}
+                className="brand-logo"
+                style={{ height: "60px", width: "auto" }}
+              />
             </div>
           </Link>
           <p>
