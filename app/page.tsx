@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { animated, useSpring } from "@react-spring/web";
-import { animate, stagger } from "animejs";
+import anime from "animejs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
@@ -128,7 +128,7 @@ export default function Home() {
       );
       gsap.fromTo(".process-line", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: ".process", start: "top 75%", end: "bottom 70%", scrub: 1 } });
     }, root);
-    animate(".hero-word", { translateY: [50, 0], opacity: [0, 1], delay: stagger(80), duration: 850, ease: "out(4)" });
+    anime({ targets: ".hero-word", translateY: [50, 0], opacity: [0, 1], delay: anime.stagger(80), duration: 850, easing: "easeOutQuart" });
     return () => ctx.revert();
   }, []);
 
