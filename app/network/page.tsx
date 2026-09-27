@@ -175,7 +175,7 @@ export default function NetworkPage() {
               </div>
             ))}
           </div>
-          <div style={{ marginTop: "32px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+          <div className="grid-2" style={{ marginTop: "32px", gap: "16px" }}>
             {[
               { label: "Advance travel coordination", icon: "✈️" },
               { label: "Pre-departure document verification", icon: "📄" },

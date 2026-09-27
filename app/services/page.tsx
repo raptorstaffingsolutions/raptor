@@ -99,17 +99,7 @@ export default function ServicesPage() {
               <div
                 key={svc.id}
                 id={svc.id}
-                className="content-card"
-                style={{
-                  padding: "0",
-                  overflow: "hidden",
-                  display: "grid",
-                  gridTemplateColumns: "360px 1fr 1fr",
-                  gap: "0",
-                  alignItems: "stretch",
-                  position: "relative",
-                  borderRadius: "28px",
-                }}
+                className="content-card service-core-card"
               >
                 {svc.aliasId && <span id={svc.aliasId} style={{ position: "absolute", top: 0 }} />}
 
@@ -341,7 +331,7 @@ export default function ServicesPage() {
           <p style={{ color: "#c4b9f5", fontSize: "17px", lineHeight: 1.7, marginBottom: "40px" }}>
             Under the Industrial Disputes Act, a workman becomes eligible for gratuity and other benefits after completing 240 continuous days of service. We maintain a rolling 240-day tracking system that protects your plant from unplanned statutory exposure.
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "20px" }}>
+          <div className="grid-3" style={{ gap: "20px" }}>
             {[
               { num: "240", label: "Days tracked per worker", sub: "Continuous service monitoring" },
               { num: "Monthly", label: "Review & reporting", sub: "Sent to client HR team" },

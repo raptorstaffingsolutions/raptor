@@ -115,7 +115,7 @@ export default function ProcessPage() {
         <div style={{ maxWidth: "920px", margin: "0 auto" }}>
           <div className="section-label light" style={{ marginBottom: "16px" }}>Strategic Partnership Approach</div>
           <h2 style={{ color: "#fff", marginBottom: "28px" }}>Our Plan for <em style={{ color: "#a78bfa" }}>Long-Term Cooperation</em></h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+          <div className="grid-2" style={{ gap: "20px" }}>
             {[
               { num: "Phase 1", title: "Needs Assessment & Site Visit", desc: "We visit your facility, understand production schedules, skill requirements, shift patterns, and specific workforce challenges." },
               { num: "Phase 2", title: "Custom Recruitment Plan", desc: "Based on the assessment, we propose a tailored recruitment blueprint with district-wise sourcing, college tie-ups, and interstate migration options." },
@@ -151,7 +151,7 @@ export default function ProcessPage() {
         <div style={{ position: "relative", borderRadius: "28px", overflow: "hidden", aspectRatio: "21 / 9", marginTop: "40px", border: "1px solid var(--line)", boxShadow: "0 14px 40px rgba(50,40,90,0.08)" }}>
           <img src="/images/campus_recruitment.jpg" alt="Campus Placement Drive Across Tamil Nadu Colleges" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(23,32,57,0.85) 100%)" }} />
-          <div style={{ position: "absolute", bottom: "20px", left: "28px", right: "28px", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <div style={{ position: "absolute", bottom: "20px", left: "28px", right: "28px", color: "#fff", display: "flex", flexWrap: "wrap", gap: "12px", justifyContent: "space-between", alignItems: "flex-end" }}>
             <div>
               <span style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.08em", opacity: 0.85, fontWeight: 700 }}>Direct Placement Channel</span>
               <strong style={{ display: "block", fontSize: "18px", fontWeight: 800 }}>81+ Partnered Colleges & Mega Walk-in Hiring Drives</strong>

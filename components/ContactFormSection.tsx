@@ -402,7 +402,7 @@ export default function ContactFormSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "48px",
             alignItems: "flex-start",
           }}
