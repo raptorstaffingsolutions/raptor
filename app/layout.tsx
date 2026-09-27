@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HashScrollHandler from "@/components/HashScrollHandler";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Raptor Staffing Solutions | Industrial Manpower & Recruitment",
   description:
     "Skilled, semi-skilled, and general manpower supply, volume recruitment, payroll compliance, and employee welfare management across South & East India.",
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: "/favicon.svg?v=2" },
   keywords: [
     "manpower solutions",
     "industrial staffing",
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <HashScrollHandler />
         <Navbar />
         {children}
         <Footer />

@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <Link href="/" className="brand" aria-label="Raptor Staffing Solutions">
-            <div className="brand-logo-wrap" style={{ background: "rgba(11,13,23,0.7)", padding: "6px 12px" }}>
+            <div className="brand-logo-wrap" style={{ padding: "6px 14px" }}>
               <Image
                 src="/logo.png"
                 alt="Raptor Staffing Solutions"
@@ -36,7 +36,7 @@ export default function Footer() {
             <li><Link href="/services">Staffing Solutions</Link></li>
             <li><Link href="/process">Recruitment Process</Link></li>
             <li><Link href="/network">Pan-India Network</Link></li>
-            <li><Link href="/contact">Employer Inquiry</Link></li>
+            <li><Link href="/contact#contact-form">Employer Inquiry</Link></li>
           </ul>
         </div>
 
@@ -58,22 +58,42 @@ export default function Footer() {
             <Building2 size={18} />
             <div>
               <strong style={{ color: "#fff" }}>Head Office:</strong><br />
-              No. 6, First Floor, Gandhi Road,<br />
-              Kanchipuram – 631501, Tamil Nadu
+              <a
+                href="https://maps.google.com/?q=No.+6,+First+Floor,+Gandhi+Road,+Kanchipuram+631501,+Tamil+Nadu"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#a5a0c7", textDecoration: "none" }}
+              >
+                No. 6, First Floor, Gandhi Road,<br />
+                Kanchipuram – 631501, Tamil Nadu
+              </a>
             </div>
           </div>
           <div className="footer-contact-item">
             <MapPin size={18} />
             <div>
               <strong style={{ color: "#fff" }}>Industrial Branch:</strong><br />
-              Vijay Complex, Walajabad Road,<br />
-              Sunguvarchatram – 602106, Tamil Nadu
+              <a
+                href="https://maps.google.com/?q=Vijay+Complex,+Walajabad+Road,+Sunguvarchatram+602106,+Tamil+Nadu"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#a5a0c7", textDecoration: "none" }}
+              >
+                Vijay Complex, Walajabad Road,<br />
+                Sunguvarchatram – 602106, Tamil Nadu
+              </a>
+            </div>
+          </div>
+          <div className="footer-contact-item">
+            <Phone size={18} />
+            <div>
+              <a href="tel:+919444169546" style={{ color: "#38d2e3", textDecoration: "none", fontWeight: 600 }}>+91 94441 69546</a>
             </div>
           </div>
           <div className="footer-contact-item">
             <Mail size={18} />
             <div>
-              <a href="mailto:info@raptorstaffing.in" style={{ color: "#38d2e3" }}>info@raptorstaffing.in</a>
+              <a href="mailto:raptorstaffingsolutions@gmail.com" style={{ color: "#38d2e3" }}>raptorstaffingsolutions@gmail.com</a>
             </div>
           </div>
         </div>

@@ -40,4 +40,4 @@ The main website code is in:
 - `app/globals.css` — responsive design and gradients
 - `app/layout.tsx` — SEO title and description
 
-Before production use, replace `info@raptorstaffing.in` with the company's confirmed email address.
+Company confirmed email address: `raptorstaffingsolutions@gmail.com`. Formspree form integration configured with `NEXT_PUBLIC_FORMSPREE_FORM_ID` in `.env.local` / `.env.example`.

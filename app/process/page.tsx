@@ -1,23 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
+import ProcessHeroSection from "@/components/ProcessHeroSection";
 import CTASection from "@/components/CTASection";
+import PreOnboardingFlowSection from "@/components/PreOnboardingFlowSection";
 import {
   ArrowRight,
   BadgeCheck,
   BookOpen,
-  Briefcase,
   Building2,
-  CalendarCheck2,
-  ClipboardList,
-  FileSearch,
   GraduationCap,
-  HeartPulse,
   MessageSquare,
-  Search,
   ShieldCheck,
   Star,
-  UserCheck,
   UserPlus,
   Users,
 } from "lucide-react";
@@ -38,57 +32,6 @@ export const metadata: Metadata = {
   ],
 };
 
-const stages = [
-  {
-    icon: Search,
-    num: "01",
-    title: "Sourcing",
-    desc: "We draw from our internal candidate database, employee referral network, online portals (Naukri, LinkedIn, Indeed), social media, and community hiring camps to identify suitable candidates for each role.",
-  },
-  {
-    icon: ClipboardList,
-    num: "02",
-    title: "Screening",
-    desc: "Initial resume screening and telephonic pre-screening to assess basic eligibility — age, education qualification, relevant experience, willingness to relocate, and attitude to the role.",
-  },
-  {
-    icon: MessageSquare,
-    num: "03",
-    title: "Interview",
-    desc: "Shortlisted candidates appear for a structured in-person or video interview conducted by our HR executives. Client hiring managers may co-conduct final interviews for specialised roles.",
-  },
-  {
-    icon: FileSearch,
-    num: "04",
-    title: "Verification",
-    desc: "All personal documents are verified — Aadhaar, PAN, education certificates, previous employment letters, and residential address proofs — to confirm identity and eligibility.",
-  },
-  {
-    icon: HeartPulse,
-    num: "05",
-    title: "Medical",
-    desc: "Mandatory medical fitness check at an empanelled clinic before deployment to ensure every worker meets the physical fitness standards required for the factory or plant environment.",
-  },
-  {
-    icon: Briefcase,
-    num: "06",
-    title: "Offer",
-    desc: "Formal offer letter issued to selected candidates with clear details on role, salary breakup, reporting location, joining date, shift, and all applicable benefits and deductions.",
-  },
-  {
-    icon: CalendarCheck2,
-    num: "07",
-    title: "Joining",
-    desc: "Smooth joining coordination — travel assistance, joining kit, attendance on Day 1, statutory form submission (PF, ESI, nominee details), and factory induction scheduling.",
-  },
-  {
-    icon: UserCheck,
-    num: "08",
-    title: "Onboarding",
-    desc: "Full factory induction, safety briefing, pre-deployment skills training, work station assignment, and buddy pairing to ensure every new joiner is productive from Day 1.",
-  },
-];
-
 const channels = [
   { icon: Users, label: "Employee Referrals", desc: "Trusted referral network from existing Raptor-deployed workers" },
   { icon: BookOpen, label: "Internal Database", desc: "Pre-screened candidate pool maintained in our proprietary ATS" },
@@ -103,55 +46,12 @@ const channels = [
 export default function ProcessPage() {
   return (
     <main>
-      <PageHero
-        badge="How We Recruit"
-        title="A Structured 8-Stage Process from"
-        highlightedText="Brief to Factory Floor"
-        description="Our proven pre-onboarding recruitment process ensures every candidate supplied to your facility is verified, medically cleared, and fully ready to contribute — with zero compliance risk."
-        breadcrumbCurrent="Our Process"
-        actionButton={
-          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-            <Link href="/contact" className="primary"><span>Discuss Your Requirement</span><ArrowRight size={16} /></Link>
-            <Link href="/services" className="secondary-btn"><span>Our Services</span></Link>
-          </div>
-        }
-      />
-
-      {/* Process Overview Strip */}
-      <section className="section" style={{ background: "#fff" }}>
-        <div className="section-head">
-          <div>
-            <div className="section-label">Pre-Onboarding Flow</div>
-            <h2>8 Stages. <em>Zero Gaps.</em></h2>
-          </div>
-          <p>Every candidate passes through our complete 8-stage pre-onboarding process before reaching your facility. No shortcuts. No surprises.</p>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginTop: "48px" }}>
-          {stages.map((stage, i) => {
-            const Icon = stage.icon;
-            return (
-              <div key={stage.num} className="process-detail-step">
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                  <div style={{
-                    width: "64px", height: "64px", borderRadius: "20px",
-                    background: i % 2 === 0 ? "linear-gradient(135deg,#7457f5,#5938da)" : "linear-gradient(135deg,#f15ca4,#e8449c)",
-                    display: "grid", placeItems: "center",
-                    boxShadow: "0 8px 20px rgba(116,87,245,.25)",
-                  }}>
-                    <Icon size={26} color="#fff" />
-                  </div>
-                  <span style={{ fontSize: "11px", fontWeight: 800, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{stage.num}</span>
-                </div>
-                <div>
-                  <h3 style={{ margin: "0 0 10px", fontSize: "21px", fontWeight: 800 }}>{stage.title}</h3>
-                  <p style={{ margin: 0, color: "var(--muted)", fontSize: "15px", lineHeight: 1.65 }}>{stage.desc}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      <ProcessHeroSection />
+      
+      {/* 8-Stage Pre-Onboarding Flow Architecture */}
+      <div id="stages">
+        <PreOnboardingFlowSection />
+      </div>
 
       {/* Sourcing Channels */}
       <section className="section" style={{ background: "linear-gradient(180deg,#faf9ff,#f5f9ff)" }}>
@@ -179,7 +79,7 @@ export default function ProcessPage() {
       </section>
 
       {/* SLA & Commitments */}
-      <section className="section" style={{ background: "#fff" }}>
+      <section id="sla" className="section" style={{ background: "#fff" }}>
         <div className="section-head">
           <div>
             <div className="section-label">Service Level Commitments</div>
@@ -247,7 +147,20 @@ export default function ProcessPage() {
           </div>
           <p>We collaborate with arts, science, polytechnic, and engineering colleges across Tamil Nadu to create a sustainable talent pipeline for our manufacturing clients.</p>
         </div>
-        <div className="grid-2" style={{ marginTop: "40px" }}>
+
+        <div style={{ position: "relative", borderRadius: "28px", overflow: "hidden", aspectRatio: "21 / 9", marginTop: "40px", border: "1px solid var(--line)", boxShadow: "0 14px 40px rgba(50,40,90,0.08)" }}>
+          <img src="/images/campus_recruitment.jpg" alt="Campus Placement Drive Across Tamil Nadu Colleges" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(23,32,57,0.85) 100%)" }} />
+          <div style={{ position: "absolute", bottom: "20px", left: "28px", right: "28px", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+            <div>
+              <span style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.08em", opacity: 0.85, fontWeight: 700 }}>Direct Placement Channel</span>
+              <strong style={{ display: "block", fontSize: "18px", fontWeight: 800 }}>81+ Partnered Colleges & Mega Walk-in Hiring Drives</strong>
+            </div>
+            <span style={{ background: "#7457f5", color: "#fff", padding: "6px 14px", borderRadius: "99px", fontSize: "12px", fontWeight: 800 }}>10 Districts in Tamil Nadu</span>
+          </div>
+        </div>
+
+        <div className="grid-2" style={{ marginTop: "32px" }}>
           <div className="content-card" style={{ padding: "36px" }}>
             <h3 style={{ marginTop: 0, marginBottom: "16px" }}>Campus Recruitment Coverage</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>

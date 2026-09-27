@@ -1,18 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
-import { animated, useSpring } from "@react-spring/web";
-import anime from "animejs";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
 import {
   ArrowRight,
+  ArrowUpRight,
   BadgeCheck,
   Building2,
   CheckCircle2,
   ChevronRight,
+  Clock,
+  Factory,
   GraduationCap,
   HeartHandshake,
   MapPin,
@@ -21,39 +23,94 @@ import {
   Sparkles,
   Target,
   Users,
+  Zap,
+  Play,
+  Award,
+  TrendingUp,
+  Globe,
+  Layers,
+  Star,
 } from "lucide-react";
 
-const services = [
+/* ──────────────── HERO CINEMATIC SLIDES ──────────────── */
+const heroSlides = [
   {
-    icon: Users,
-    title: "Manpower Supply",
-    text: "Skilled, semi-skilled, and unskilled workforce for manufacturing plants across SIPCOT industrial parks in Tamil Nadu.",
-    tone: "violet",
-    href: "/services#manpower",
+    id: "workforce",
+    title: "Skilled Plant Technicians",
+    subtitle: "Tamil Nadu Industrial Corridor",
+    image: "/images/hero_manufacturing.jpg",
+    caption: "3,064+ Verified Headcounts Across SIPCOT",
+    stat: "24–72h SLA",
   },
   {
-    icon: GraduationCap,
-    title: "Campus & Job Fair Recruitment",
-    text: "Structured campus drives, mega job fairs, and walk-in interviews across 81+ colleges in 10 districts of Tamil Nadu.",
-    tone: "sky",
-    href: "/services#recruitment",
+    id: "assembly",
+    title: "Electronics & Automotive Assembly",
+    subtitle: "Cleanroom & Line Assembly",
+    image: "/images/hero_industrial_park.jpg",
+    caption: "Trained for High-Precision Manufacturing",
+    stat: "Zero Downtime",
   },
   {
-    icon: HeartHandshake,
-    title: "HR & Payroll Management",
-    text: "Induction, pre-deployment training, PF, ESI, bonus, payroll processing, and employee grievance resolution.",
-    tone: "rose",
-    href: "/services#hr",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Statutory Compliance",
-    text: "Full Labour Law compliance, self-assessment audits, and 240-day service management per Industrial Disputes Act.",
-    tone: "amber",
-    href: "/services#compliance",
+    id: "logistics",
+    title: "Warehouse & Material Logistics",
+    subtitle: "High-Bay Inventory & Dispatch",
+    image: "/images/hero_warehouse.jpg",
+    caption: "Supply Chain & Dispatch Crews",
+    stat: "100% Verified",
   },
 ];
 
+/* ──────────────── SECTOR SHOWCASE DATA ──────────────── */
+const visualSectors = [
+  {
+    title: "Assembly & Manufacturing Operators",
+    badge: "SIPCOT High-Tech",
+    image: "/images/hero_manufacturing.jpg",
+    desc: "Precision electronic cleanroom assemblers, SMT line technicians, and automotive component operators trained for zero-defect output.",
+    pills: ["Electronics", "Automotive", "Cleanroom", "Line Assembly"],
+    href: "/services#manpower",
+    icon: <Factory size={22} />,
+  },
+  {
+    title: "Warehousing & Material Logistics",
+    badge: "24/7 Operations",
+    image: "/images/hero_warehouse.jpg",
+    desc: "Inventory barcode scanners, forklift drivers, dispatch specialists, and packaging crews powering fast-turnaround distribution hubs.",
+    pills: ["Material Handling", "Inventory", "Packaging", "3 Shifts"],
+    href: "/services#manpower",
+    icon: <Layers size={22} />,
+  },
+  {
+    title: "Pre-Deployment & Safety Training",
+    badge: "EHS & 5S Certified",
+    image: "/images/hero_team_training.jpg",
+    desc: "Every candidate undergoes mandatory plant safety induction, PPE guidelines, discipline training, and medical fitness checks before day one.",
+    pills: ["Safety First", "Labour Laws", "Medical Fitness", "PF/ESI"],
+    href: "/process",
+    icon: <ShieldCheck size={22} />,
+  },
+  {
+    title: "Campus Drives & Mega Job Fairs",
+    badge: "81+ College Tie-ups",
+    image: "/images/hero_recruitment.jpg",
+    desc: "Structured campus placements and walk-in hiring drives across 10 districts in Tamil Nadu to secure motivated ITI, Diploma, and Graduate talent.",
+    pills: ["ITI/Diploma", "Mega Fairs", "19 Districts", "Fresh Talent"],
+    href: "/services#recruitment",
+    icon: <GraduationCap size={22} />,
+  },
+];
+
+/* ──────────────── CLIENTS DATA ──────────────── */
+const clients = [
+  { name: "Bharat FIH", sub: "A Foxconn Technology Group Company", location: "SIPCOT Phase-II, Sunguvarchatram", tag: "Electronics Manufacturing" },
+  { name: "KYOWA", sub: "Aluminium Metal Manufacturing", location: "SIPCOT Industrial Park, Vallam Vadagal", tag: "Metal & Precision Parts" },
+  { name: "KIML", sub: "Kyungshin Industrial Motherson Pvt. Ltd.", location: "SIPCOT Growth Centre, Sriperumbudur", tag: "Automotive Wiring Systems" },
+  { name: "Motherson Polymer Solutions", sub: "Motherson Group", location: "SIPCOT Industrial Growth Center, Oragadam", tag: "Polymer Components" },
+  { name: "Rising Stars Hi-Tech", sub: "A Bharat FIH Company", location: "SIPCOT Hi-Tech SEZ, Sunguvarchatram", tag: "Hi-Tech Manufacturing" },
+  { name: "WOWTEK", sub: "A FIH Mobile Group Company", location: "SIPCOT Phase III, Sriperumbudur Taluk", tag: "Precision Mobile Hardware" },
+];
+
+/* ──────────────── THREE.JS PARTICLE CANVAS ──────────────── */
 function HeroCanvas() {
   const mount = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -63,230 +120,676 @@ function HeroCanvas() {
     const camera = new THREE.PerspectiveCamera(50, el.clientWidth / el.clientHeight, 0.1, 100);
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     camera.position.z = 7;
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.7));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(el.clientWidth, el.clientHeight);
     el.appendChild(renderer.domElement);
-    const geo = new THREE.BufferGeometry();
-    const count = 850;
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count * 3; i += 3) {
-      pos[i] = (Math.random() - 0.5) * 12;
-      pos[i + 1] = (Math.random() - 0.5) * 8;
-      pos[i + 2] = (Math.random() - 0.5) * 8;
+
+    // Group 1: Cyan Particles
+    const count1 = 400;
+    const pos1 = new Float32Array(count1 * 3);
+    for (let i = 0; i < count1 * 3; i += 3) {
+      pos1[i] = (Math.random() - 0.5) * 16;
+      pos1[i + 1] = (Math.random() - 0.5) * 10;
+      pos1[i + 2] = (Math.random() - 0.5) * 10;
     }
-    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    const mat = new THREE.PointsMaterial({ size: 0.035, color: 0x7c3aed, transparent: true, opacity: 0.55 });
-    const points = new THREE.Points(geo, mat);
-    scene.add(points);
+    const geo1 = new THREE.BufferGeometry();
+    geo1.setAttribute("position", new THREE.BufferAttribute(pos1, 3));
+    const mat1 = new THREE.PointsMaterial({
+      size: 0.032,
+      color: 0x00f0ff,
+      transparent: true,
+      opacity: 0.45,
+    });
+    const points1 = new THREE.Points(geo1, mat1);
+    scene.add(points1);
+
+    // Group 2: Violet Particles
+    const count2 = 400;
+    const pos2 = new Float32Array(count2 * 3);
+    for (let i = 0; i < count2 * 3; i += 3) {
+      pos2[i] = (Math.random() - 0.5) * 16;
+      pos2[i + 1] = (Math.random() - 0.5) * 10;
+      pos2[i + 2] = (Math.random() - 0.5) * 10;
+    }
+    const geo2 = new THREE.BufferGeometry();
+    geo2.setAttribute("position", new THREE.BufferAttribute(pos2, 3));
+    const mat2 = new THREE.PointsMaterial({
+      size: 0.028,
+      color: 0x7c3aed,
+      transparent: true,
+      opacity: 0.4,
+    });
+    const points2 = new THREE.Points(geo2, mat2);
+    scene.add(points2);
+
+    let mouseX = 0;
+    let mouseY = 0;
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 0.3;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 0.3;
+    };
+    window.addEventListener("mousemove", onMouseMove);
+
     let frame = 0;
-    const draw = () => { points.rotation.y += 0.0008; points.rotation.x += 0.00025; renderer.render(scene, camera); frame = requestAnimationFrame(draw); };
+    const draw = () => {
+      points1.rotation.y += 0.0005;
+      points1.rotation.x += 0.0002;
+      points2.rotation.y -= 0.0003;
+      points2.rotation.x -= 0.00015;
+
+      camera.position.x += (mouseX - camera.position.x) * 0.02;
+      camera.position.y += (-mouseY - camera.position.y) * 0.02;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+      frame = requestAnimationFrame(draw);
+    };
     draw();
-    const resize = () => { camera.aspect = el.clientWidth / el.clientHeight; camera.updateProjectionMatrix(); renderer.setSize(el.clientWidth, el.clientHeight); };
+
+    const resize = () => {
+      if (!el) return;
+      camera.aspect = el.clientWidth / el.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(el.clientWidth, el.clientHeight);
+    };
     window.addEventListener("resize", resize);
-    return () => { cancelAnimationFrame(frame); window.removeEventListener("resize", resize); renderer.dispose(); geo.dispose(); mat.dispose(); renderer.domElement.remove(); };
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouseMove);
+      renderer.dispose();
+      geo1.dispose();
+      mat1.dispose();
+      geo2.dispose();
+      mat2.dispose();
+      renderer.domElement.remove();
+    };
   }, []);
   return <div className="hero-canvas" ref={mount} aria-hidden="true" />;
 }
 
-function ServiceCard({ item, index }: { item: (typeof services)[number]; index: number }) {
-  const [style, api] = useSpring(() => ({ transform: "translateY(0px) scale(1)", boxShadow: "0 18px 60px rgba(74,55,130,.08)" }));
-  const Icon = item.icon;
-  return (
-    <animated.article
-      className={"service-card " + item.tone}
-      style={style}
-      onMouseEnter={() => api.start({ transform: "translateY(-10px) scale(1.015)", boxShadow: "0 30px 80px rgba(74,55,130,.17)" })}
-      onMouseLeave={() => api.start({ transform: "translateY(0px) scale(1)", boxShadow: "0 18px 60px rgba(74,55,130,.08)" })}
-    >
-      <span className="card-number">0{index + 1}</span>
-      <Icon size={32} />
-      <h3>{item.title}</h3>
-      <p>{item.text}</p>
-      <Link href={item.href} className="service-link">
-        Learn more <ArrowRight size={14} />
-      </Link>
-    </animated.article>
-  );
+/* ──────────────── ANIMATED COUNTER ──────────────── */
+function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const counted = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !counted.current) {
+          counted.current = true;
+          const dur = 2000;
+          const start = performance.now();
+          const animate = (now: number) => {
+            const progress = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - progress, 4);
+            el.textContent = prefix + Math.round(end * eased).toLocaleString() + suffix;
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [end, suffix, prefix]);
+
+  return <span className="counter-val" ref={ref}>{prefix}0{suffix}</span>;
 }
 
-const clients = [
-  { name: "Bharat FIH", sub: "A Foxconn Technology Group Company", location: "SIPCOT Industrial Park Phase-II, Sunguvarchatram, Sriperumbudur – 602 106" },
-  { name: "KYOWA", sub: "Aluminium Metal Manufacturing", location: "Plot No. VV 8, SIPCOT Industrial Park, Vallam Vadagal Village, Sriperumbudur – 631 604" },
-  { name: "KIML", sub: "Kyungshin Industrial Motherson Pvt. Ltd.", location: "Survey No. 451, 452A, 444, Oragadam Village, Mathur Village, Sipcot Growth Centre, Sriperumbudur – 602 105" },
-  { name: "Motherson Polymer Solutions", sub: "Motherson Group", location: "A4, SIPCOT Industrial Growth Center, Chengalpet–Sriperumbudur Road, Oragadam, Tamil Nadu" },
-  { name: "Rising Stars Hi-Tech", sub: "A Bharat FIH Company", location: "M2/A-1, SIPCOT Hi-Tech SEZ, Industrial Park Phase II, Sunguvarchatram, Kanchipuram – 602 306" },
-  { name: "WOWTEK", sub: "A FIH Mobile Group Company", location: "Phase III, SIPCOT Industrial Park, Pondur Village, Sriperumbudur Taluk, Kanchipuram – 602 105" },
-];
-
+/* ──────────────── MAIN PAGE COMPONENT ──────────────── */
 export default function Home() {
   const root = useRef<HTMLElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [selectedRole, setSelectedRole] = useState("Assembly Line");
+  const [selectedCount, setSelectedCount] = useState("50–150 Workers");
+  const [selectedShift, setSelectedShift] = useState("2 Shifts (Rotational)");
+
+  /* ─── GSAP Scroll Animations ─── */
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) =>
-        gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" } })
+      /* Reveal on scroll */
+      gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
+          }
+        );
+      });
+
+      /* Stagger reveal for grid items */
+      gsap.utils.toArray<HTMLElement>(".stagger-parent").forEach((parent) => {
+        const children = parent.querySelectorAll(".stagger-child");
+        gsap.fromTo(
+          children,
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: parent, start: "top 85%", toggleActions: "play none none none" },
+          }
+        );
+      });
+
+      /* Hero timeline - cinematic entry */
+      const heroTl = gsap.timeline({ defaults: { ease: "expo.out" } });
+      heroTl
+        // Animate the Orbs
+        .fromTo(".orb", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 2, stagger: 0.2, ease: "power3.out" }, 0)
+        // Eyebrow reveal
+        .fromTo(".hero-eyebrow", { y: -30, opacity: 0, filter: "blur(4px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1, delay: 0.1 }, 0)
+        // Title lines dramatic entrance
+        .fromTo(".hero-title-line", 
+          { y: 100, opacity: 0, rotateX: -45, scale: 0.9, transformOrigin: "0% 50%" }, 
+          { y: 0, opacity: 1, rotateX: 0, scale: 1, duration: 1.2, stagger: 0.15, ease: "back.out(1.2)" }, 
+          "-=0.7"
+        )
+        // Lede text slide up
+        .fromTo(".hero-lede", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=0.8")
+        // Actions pop in
+        .fromTo(".hero-actions", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.8")
+        // Proof stats scale stagger
+        .fromTo(".hero-proof > div", 
+          { y: 30, opacity: 0, scale: 0.8 }, 
+          { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.1, ease: "elastic.out(1, 0.7)" }, 
+          "-=0.6"
+        )
+        // Visual card dramatic slide + scale + blur reveal
+        .fromTo(".hero-visual-card", 
+          { x: 120, opacity: 0, scale: 0.8, rotateY: 15, filter: "blur(10px)" }, 
+          { x: 0, opacity: 1, scale: 1, rotateY: 0, filter: "blur(0px)", duration: 1.5, ease: "power4.out" }, 
+          "-=1.5"
+        )
+        // Badges pop
+        .fromTo(".hero-badge-float", 
+          { scale: 0, opacity: 0, y: 20 }, 
+          { scale: 1, opacity: 1, y: 0, duration: 0.8, stagger: 0.25, ease: "back.out(2.5)" }, 
+          "-=0.8"
+        )
+        // Client ticker reveal
+        .fromTo(".hero-client-ticker",
+          { y: 25, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" },
+          "-=0.6"
+        );
+
+      /* Process line animation */
+      gsap.fromTo(
+        ".process-line",
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          ease: "none",
+          scrollTrigger: { trigger: ".process", start: "top 75%", end: "bottom 70%", scrub: 1 },
+        }
       );
-      gsap.fromTo(".process-line", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: ".process", start: "top 75%", end: "bottom 70%", scrub: 1 } });
+
+      /* Parallax images */
+      gsap.utils.toArray<HTMLElement>(".parallax-img").forEach((img) => {
+        gsap.to(img, {
+          yPercent: -12,
+          ease: "none",
+          scrollTrigger: { trigger: img.closest(".parallax-wrap"), start: "top bottom", end: "bottom top", scrub: true },
+        });
+      });
+
     }, root);
-    anime({ targets: ".hero-word", translateY: [50, 0], opacity: [0, 1], delay: anime.stagger(80), duration: 850, easing: "easeOutQuart" });
+
     return () => ctx.revert();
   }, []);
 
+  /* ─── Auto-cycle hero slides ─── */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const currentSlide = heroSlides[activeSlide];
+
+  const getDeploymentTime = () => {
+    if (selectedCount === "25–50 Workers") return "24–48 Hours";
+    if (selectedCount === "50–150 Workers") return "48–72 Hours";
+    return "3–5 Days (Staged)";
+  };
+
   return (
     <main ref={root}>
-      {/* ───── Hero ───── */}
+      {/* ═══════════════ CINEMATIC HERO ═══════════════ */}
       <section className="hero" id="home">
         <HeroCanvas />
+        <div className="hero-mesh-grid" />
         <div className="orb orb-a" />
         <div className="orb orb-b" />
-        <div className="hero-copy">
-          <p className="eyebrow hero-word">
-            <Sparkles size={16} /> Trusted Manpower & Recruitment Partner — Tamil Nadu
+        <div className="orb orb-c" />
+        <div className="orb orb-d" />
+
+        <div className="hero-split">
+          {/* LEFT: Headlines & Telemetry */}
+          <div className="hero-copy">
+            <div className="hero-eyebrow">
+              <span className="hero-live-beacon" />
+              <Sparkles size={14} style={{ color: "#00f0ff" }} />
+              <span>PREMIER INDUSTRIAL WORKFORCE INFRASTRUCTURE</span>
+              <span className="hero-eyebrow-divider">|</span>
+              <span className="hero-eyebrow-sub">SIPCOT // SRIPERUMBUDUR // ORAGADAM</span>
+            </div>
+
+            <h1>
+              <span className="hero-title-line">PEOPLE POWER.</span>
+              <span className="hero-title-line gradient-text">PLANT PRODUCTIVITY.</span>
+            </h1>
+
+            <p className="hero-lede">
+              Raptor Staffing Solutions delivers verified, medically cleared, and 100% statutory-compliant workforce teams for Fortune 500 &amp; Tier-1 manufacturers across Tamil Nadu’s SIPCOT corridors — backed by complete PF, ESI, and zero-defect legal immunity.
+            </p>
+
+            <div className="hero-actions">
+              <Link href="/contact" className="hero-primary-cta">
+                <span>Deploy Workforce Now</span>
+                <ArrowRight size={18} />
+              </Link>
+              <Link href="/services" className="hero-secondary-cta">
+                <Zap size={16} color="#00f0ff" />
+                <span>Explore Plant Solutions</span>
+              </Link>
+              <div className="hero-sla-pill">
+                <Clock size={14} color="#00f0ff" />
+                <span>24–72h Rapid Mobilisation SLA</span>
+              </div>
+            </div>
+
+            <div className="hero-proof">
+              <div className="hero-proof-item">
+                <strong className="hero-proof-value" style={{ color: "#00f0ff" }}>
+                  <AnimatedCounter end={3064} suffix="+" />
+                </strong>
+                <span className="hero-proof-label">Active Headcounts</span>
+                <span className="hero-proof-sub">SIPCOT Plant Deployment</span>
+              </div>
+              <div className="hero-proof-item">
+                <strong className="hero-proof-value" style={{ color: "#a78bfa" }}>
+                  <AnimatedCounter end={19} />
+                </strong>
+                <span className="hero-proof-label">Source Districts</span>
+                <span className="hero-proof-sub">Pan-TN Talent Pipeline</span>
+              </div>
+              <div className="hero-proof-item">
+                <strong className="hero-proof-value" style={{ color: "#f15ca4" }}>
+                  <AnimatedCounter end={81} suffix="+" />
+                </strong>
+                <span className="hero-proof-label">College Tie-Ups</span>
+                <span className="hero-proof-sub">Campus Placement Drives</span>
+              </div>
+              <div className="hero-proof-item">
+                <strong className="hero-proof-value" style={{ color: "#10b981" }}>
+                  <AnimatedCounter end={100} suffix="%" />
+                </strong>
+                <span className="hero-proof-label">Statutory Compliance</span>
+                <span className="hero-proof-sub">Audited PF, ESI &amp; CLRA</span>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: Industrial Command Console */}
+          <div className="hero-visual-card">
+            {/* Top Frame Status Header */}
+            <div className="hero-console-header">
+              <div className="hero-console-status">
+                <span className="hero-console-dot" />
+                <span>LIVE INDUSTRIAL FEED // SIPCOT PHASE II</span>
+              </div>
+              <div className="hero-console-cam">
+                FEED {String(activeSlide + 1).padStart(2, "0")} / 03
+              </div>
+            </div>
+
+            {/* Floating Holographic Badges */}
+            <div className="hero-badge-float badge-top-right">
+              <div className="live-pulse-dot" />
+              <div>
+                <strong style={{ fontSize: "12.5px", color: "#ffffff", display: "block" }}>
+                  100% Labour Law Compliant
+                </strong>
+                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
+                  PF, ESI &amp; Statutory Audited
+                </span>
+              </div>
+            </div>
+
+            <div className="hero-badge-float badge-bottom-left">
+              <ShieldCheck size={20} color="#00f0ff" style={{ flexShrink: 0 }} />
+              <div>
+                <strong style={{ fontSize: "12.5px", color: "#ffffff", display: "block" }}>
+                  Tier-1 OEM Trusted Partner
+                </strong>
+                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
+                  Foxconn, Motherson &amp; KYOWA
+                </span>
+              </div>
+            </div>
+
+            <div className="hero-badge-float badge-mid-right">
+              <Award size={18} color="#f15ca4" style={{ flexShrink: 0 }} />
+              <div>
+                <strong style={{ fontSize: "12.5px", color: "#ffffff", display: "block" }}>
+                  Zero Candidate Fees
+                </strong>
+                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
+                  Ethical Employer Model
+                </span>
+              </div>
+            </div>
+
+            {/* Main Visual Display Frame with HUD brackets */}
+            <div className="hero-main-img-wrap">
+              <div className="hero-hud-bracket bracket-tl" />
+              <div className="hero-hud-bracket bracket-tr" />
+              <div className="hero-hud-bracket bracket-bl" />
+              <div className="hero-hud-bracket bracket-br" />
+
+              {heroSlides.map((slide, idx) => (
+                <Image
+                  key={slide.id}
+                  src={slide.image}
+                  alt={slide.title}
+                  width={800}
+                  height={500}
+                  priority={idx === 0}
+                  className={`hero-main-img ${activeSlide === idx ? "active" : ""}`}
+                />
+              ))}
+              <div className="hero-img-gradient-overlay" />
+              <div className="hero-img-caption">
+                <div>
+                  <span>{currentSlide.subtitle}</span>
+                  <strong>{currentSlide.title}</strong>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <span style={{ color: "#00f0ff", fontWeight: 800 }}>{currentSlide.stat}</span>
+                  <div style={{ fontSize: "11px", opacity: 0.9 }}>{currentSlide.caption}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sector Selector Tabs Bar with Progress */}
+            <div className="hero-tabs-bar">
+              {heroSlides.map((slide, idx) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  className={`hero-tab-btn ${activeSlide === idx ? "active" : ""}`}
+                  onClick={() => setActiveSlide(idx)}
+                >
+                  {activeSlide === idx && <span className="hero-tab-progress" />}
+                  0{idx + 1}. {slide.title.split(" ")[0]} {slide.title.split(" ")[1] || ""}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Client Marquee Strip inside Hero */}
+        <div className="hero-client-ticker">
+          <span className="hero-ticker-label">TRUSTED WORKFORCE PARTNER TO SIPCOT INDUSTRIAL LEADERS</span>
+          <div className="hero-ticker-grid">
+            {clients.map((c) => (
+              <div key={c.name} className="hero-ticker-item">
+                <Building2 size={14} color="#00f0ff" />
+                <span>{c.name}</span>
+                <span className="hero-ticker-tag">{c.tag}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ STATS BAND ═══════════════ */}
+      <div className="stats-band">
+        {[
+          { value: 6, suffix: "+", label: "Major Industry Clients", sub: "Tier-1 Auto & Electronics", icon: <Building2 size={24} /> },
+          { value: 5, label: "Interstate Sourcing States", sub: "Pan-India Talent Pipeline", icon: <Globe size={24} /> },
+          { label: "Rapid Deployment SLA", display: "24–72h", sub: "Guaranteed Plant Delivery", icon: <Clock size={24} /> },
+          { label: "End-to-End Plant Support", display: "360°", sub: "Hostel, PF & Welfare Care", icon: <Target size={24} /> },
+        ].map((item, i) => (
+          <div key={i} className="stats-band-item">
+            <div className="stats-icon">{item.icon}</div>
+            <strong className="stats-value">{item.display || <AnimatedCounter end={item.value!} suffix={item.suffix || ""} />}</strong>
+            <span className="stats-label">{item.label}</span>
+            <span className="stats-sub">{item.sub}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* ═══════════════ MARQUEE ═══════════════ */}
+      <section className="marquee" style={{ marginTop: "60px" }}>
+        <div>
+          MANPOWER SUPPLY • ASSEMBLY LINE OPERATORS • WAREHOUSE & LOGISTICS • STATUTORY AUDIT • PF & ESI COMPLIANCE • CAMPUS RECRUITMENT • PRE-DEPLOYMENT TRAINING •{" "}
+          <span>MANPOWER SUPPLY • ASSEMBLY LINE OPERATORS • WAREHOUSE & LOGISTICS • STATUTORY AUDIT • PF & ESI COMPLIANCE • CAMPUS RECRUITMENT • PRE-DEPLOYMENT TRAINING •</span>
+        </div>
+      </section>
+
+      {/* ═══════════════ VISUAL SECTORS SHOWCASE ═══════════════ */}
+      <section className="section" id="sectors" style={{ background: "#fbfaff" }}>
+        <div className="section-head reveal">
+          <div>
+            <div className="section-label">01 / Workforce Capabilities</div>
+            <h2>
+              Visualising Our <em>Plant Workforce</em> in Action
+            </h2>
+          </div>
+          <p>
+            Real manpower on real production lines. We recruit, screen, and manage candidates across high-demand industrial disciplines.
           </p>
-          <h1>
-            <span className="hero-word">People Power.</span>
-            <span className="gradient-text hero-word">Plant Productivity.</span>
-          </h1>
-          <p className="hero-lede hero-word">
-            Raptor Staffing Solutions supplies skilled, semi-skilled, and unskilled manpower to leading manufacturers across SIPCOT industrial corridors — with full PF, ESI, and Labour Law compliance.
+        </div>
+
+        <div className="workforce-sector-grid stagger-parent">
+          {visualSectors.map((sec, idx) => (
+            <article key={idx} className="sector-visual-card stagger-child">
+              <div className="sector-img-container parallax-wrap">
+                <Image
+                  src={sec.image}
+                  alt={sec.title}
+                  width={600}
+                  height={450}
+                  className="sector-img parallax-img"
+                />
+                <span className="sector-badge">{sec.badge}</span>
+                <div className="sector-img-overlay">
+                  <div className="sector-overlay-icon">{sec.icon}</div>
+                </div>
+              </div>
+              <div className="sector-body">
+                <h3>{sec.title}</h3>
+                <p>{sec.desc}</p>
+                <div className="sector-meta-pills">
+                  {sec.pills.map((pill) => (
+                    <span key={pill} className="sector-pill">
+                      <CheckCircle2 size={10} /> {pill}
+                    </span>
+                  ))}
+                </div>
+                <Link href={sec.href} className="service-link" style={{ marginTop: "auto" }}>
+                  <span>Explore service details</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════ IMMERSIVE INDUSTRIAL CORRIDOR ═══════════════ */}
+      <section className="immersive-showcase">
+        <div className="immersive-bg parallax-wrap">
+          <Image
+            src="/images/hero_industrial_park.jpg"
+            alt="SIPCOT Industrial Corridor Aerial View"
+            fill
+            className="immersive-bg-img parallax-img"
+            style={{ objectFit: "cover" }}
+          />
+          <div className="immersive-overlay" />
+        </div>
+        <div className="immersive-content reveal">
+          <span className="badge-pill" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.3)", color: "#fff" }}>
+            <Factory size={14} /> SIPCOT Industrial Footprint
+          </span>
+          <h2>
+            Anchored in Tamil Nadu's<br />
+            <em style={{ color: "#34cddd", fontStyle: "italic", fontFamily: "Georgia, serif" }}>Manufacturing Epicenter</em>
+          </h2>
+          <p>
+            Operating directly within Sriperumbudur, Oragadam, Sunguvarchatram, and Kanchipuram manufacturing hubs with immediate local response and 24–72 hour replacement SLAs.
           </p>
-          <div className="hero-actions hero-word">
-            <Link href="/contact" className="primary">
-              <span>Request Manpower</span>
-              <ArrowRight size={18} />
+          <div className="immersive-stats">
+            {[
+              { icon: <MapPin size={18} />, label: "Sriperumbudur SEZ" },
+              { icon: <MapPin size={18} />, label: "Oragadam Auto Corridor" },
+              { icon: <MapPin size={18} />, label: "Sunguvarchatram Hi-Tech" },
+              { icon: <MapPin size={18} />, label: "Vallam Vadagal Park" },
+            ].map((loc, i) => (
+              <span key={i} className="immersive-location">
+                {loc.icon} {loc.label}
+              </span>
+            ))}
+          </div>
+          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginTop: "30px" }}>
+            <Link href="/network" className="light-btn">
+              <span>View 19 Source Districts</span>
+              <ArrowRight size={16} />
             </Link>
-            <Link href="/about" className="text-link">
-              <span>About Raptor</span>
-              <ChevronRight size={16} />
+            <Link href="/about" className="secondary-btn" style={{ borderColor: "rgba(255,255,255,0.4)", color: "#fff", background: "rgba(255,255,255,0.08)" }}>
+              <span>Meet Our Team</span>
+              <ArrowUpRight size={16} />
             </Link>
           </div>
         </div>
-        <div className="hero-proof hero-word">
-          <div><strong>3,064+</strong><span>confirmed headcounts</span></div>
-          <div><strong>19</strong><span>source districts</span></div>
-          <div><strong>81+</strong><span>college tie-ups</span></div>
-          <div><strong>100%</strong><span>statutory compliance</span></div>
-        </div>
       </section>
 
-      {/* ───── Stats Band ───── */}
-      <div className="stats-band">
-        <div className="stats-band-item">
-          <strong>6+</strong>
-          <span>Major Industry Clients</span>
+      {/* ═══════════════ MANPOWER ESTIMATOR ═══════════════ */}
+      <section className="section" style={{ background: "#f8f9fc", paddingTop: "50px" }}>
+        <div className="section-head reveal">
+          <div>
+            <div className="section-label">02 / Quick Workforce Planner</div>
+            <h2>
+              Estimate Your <em>Deployment Timeline</em>
+            </h2>
+          </div>
+          <p>
+            Configure your plant's immediate workforce requirements and get an instant deployment turnaround estimate.
+          </p>
         </div>
-        <div className="stats-band-item">
-          <strong>5</strong>
-          <span>Interstate Sourcing States</span>
-        </div>
-        <div className="stats-band-item">
-          <strong>24–72h</strong>
-          <span>Deployment SLA</span>
-        </div>
-        <div className="stats-band-item">
-          <strong>360°</strong>
-          <span>Workforce Management</span>
-        </div>
-      </div>
 
-      {/* ───── Marquee ───── */}
-      <section className="marquee" style={{ marginTop: "60px" }}>
-        <div>
-          MANPOWER SUPPLY • CAMPUS RECRUITMENT • PAYROLL PROCESSING • PF & ESI COMPLIANCE • EMPLOYEE WELFARE • SHIFT MANAGEMENT • STATUTORY AUDIT • GRIEVANCE RESOLUTION •{" "}
-          <span>MANPOWER SUPPLY • CAMPUS RECRUITMENT • PAYROLL PROCESSING • PF & ESI COMPLIANCE • EMPLOYEE WELFARE • SHIFT MANAGEMENT • STATUTORY AUDIT • GRIEVANCE RESOLUTION •</span>
-        </div>
-      </section>
-
-      {/* ───── About Teaser ───── */}
-      <section className="section about">
-        <div className="section-label reveal">01 / Who We Are</div>
-        <div className="about-grid">
-          <h2 className="reveal">
-            Simplifying Hiring. <em>Empowering Manufacturing.</em>
-          </h2>
-          <div className="about-copy reveal">
-            <p>
-              Raptor Staffing Solutions specialises in providing manpower of various categories as per client requirements. We connect businesses with qualified candidates — skilled, semi-skilled, and unskilled — for their complete workforce needs.
-            </p>
-            <p style={{ marginTop: "14px" }}>
-              We are a <strong>friendly, affordable, efficient, and stress-free</strong> recruitment partner. Our services are structured to be <strong>at no extra cost to employers</strong>, making hiring simpler and more efficient for every manufacturing plant we serve.
-            </p>
-            <div className="trust-line">
-              <BadgeCheck size={20} /> Responsive. Proactive. Built around your production needs.
+        <div className="estimator-box reveal">
+          <div className="estimator-grid">
+            <div>
+              <div className="estimator-control-group">
+                <label>1. Select Industry Discipline</label>
+                <div className="estimator-chip-row">
+                  {["Assembly Line", "Logistics & Dispatch", "Quality Control", "General Factory"].map((r) => (
+                    <button key={r} type="button" className={`estimator-chip ${selectedRole === r ? "active" : ""}`} onClick={() => setSelectedRole(r)}>
+                      {r}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="estimator-control-group">
+                <label>2. Required Headcount Scale</label>
+                <div className="estimator-chip-row">
+                  {["25–50 Workers", "50–150 Workers", "150–500+ Workers"].map((c) => (
+                    <button key={c} type="button" className={`estimator-chip ${selectedCount === c ? "active" : ""}`} onClick={() => setSelectedCount(c)}>
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="estimator-control-group" style={{ marginBottom: 0 }}>
+                <label>3. Shift Configuration</label>
+                <div className="estimator-chip-row">
+                  {["Single General Shift", "2 Shifts (Rotational)", "3 Shifts (24/7 Operations)"].map((s) => (
+                    <button key={s} type="button" className={`estimator-chip ${selectedShift === s ? "active" : ""}`} onClick={() => setSelectedShift(s)}>
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div style={{ marginTop: "20px" }}>
-              <Link href="/about" className="text-link" style={{ fontSize: "15px" }}>
-                <span>Meet our leadership team</span>
+
+            <div className="estimator-result-card">
+              <span style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#a5f3fc", fontWeight: 800 }}>
+                Estimated Deployment Window
+              </span>
+              <div style={{ fontSize: "40px", fontWeight: 900, color: "#fff", margin: "10px 0 6px" }}>
+                {getDeploymentTime()}
+              </div>
+              <p style={{ fontSize: "13px", color: "#e0f2fe", lineHeight: 1.5, margin: "0 0 20px" }}>
+                Customized for <strong>{selectedCount}</strong> in <strong>{selectedRole}</strong> across <strong>{selectedShift}</strong>.
+              </p>
+
+              <div style={{ background: "rgba(255,255,255,0.08)", padding: "14px", borderRadius: "14px", textAlign: "left", marginBottom: "22px" }}>
+                {["100% PF, ESI & Labour Law Verified", "Pre-deployment Safety & 5S Inducted", "Dedicated On-Site Supervisor"].map((item, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "12px", color: "#fff", marginBottom: i < 2 ? "6px" : 0 }}>
+                    <CheckCircle2 size={14} color="#34cddd" /> {item}
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href={`/contact?role=${encodeURIComponent(selectedRole)}&count=${encodeURIComponent(selectedCount)}`}
+                className="light-btn"
+                style={{ width: "100%", justifyContent: "center" }}
+              >
+                <span>Request Proposal for {selectedCount}</span>
                 <ArrowRight size={16} />
               </Link>
             </div>
           </div>
         </div>
-
-        <div className="vision-wrap reveal">
-          <article>
-            <Target />
-            <small>Our Vision</small>
-            <h3>Provide manpower solutions of the highest standards through value-added services.</h3>
-            <p style={{ color: "var(--muted)", fontSize: "14px", marginTop: "12px" }}>
-              Establish Raptor among the finest staffing partners across all departments of our core competency in Tamil Nadu.
-            </p>
-          </article>
-          <article>
-            <Sparkles />
-            <small>Our Mission</small>
-            <h3>Deliver the best service to clients and workers with efficiency and integrity.</h3>
-            <p style={{ color: "var(--muted)", fontSize: "14px", marginTop: "12px" }}>
-              Backed by expert consultants in respective fields, we aim to be the first choice of the manufacturing industry through an unrivalled blend of knowledge and cross-border skills.
-            </p>
-          </article>
-        </div>
       </section>
 
-      {/* ───── Services Grid ───── */}
-      <section className="section services">
-        <div className="section-head reveal">
-          <div>
-            <div className="section-label">02 / What We Deliver</div>
-            <h2>One Partner.<br /><span className="gradient-text">Every Workforce Need.</span></h2>
-          </div>
-          <div>
-            <p>From sourcing and screening to payroll and statutory compliance — we manage the complete manpower lifecycle.</p>
-            <div style={{ marginTop: "14px" }}>
-              <Link href="/services" className="primary" style={{ padding: "10px 18px", fontSize: "13px" }}>
-                <span>View All Services</span>
-                <ArrowRight size={15} />
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="services-grid">
-          {services.map((x, i) => <ServiceCard key={x.title} item={x} index={i} />)}
-        </div>
-      </section>
-
-      {/* ───── Valued Clients ───── */}
-      <section className="section" style={{ background: "#fff", paddingTop: "60px" }}>
+      {/* ═══════════════ VALUED CLIENTS ═══════════════ */}
+      <section className="section" style={{ background: "#fff" }}>
         <div className="section-head reveal">
           <div>
             <div className="section-label">03 / Our Valued Clients</div>
-            <h2>Trusted by India's <em>Leading Manufacturers</em></h2>
+            <h2>
+              Trusted by India's <em>Leading Manufacturers</em>
+            </h2>
           </div>
           <p>
-            We proudly serve global manufacturers and multinational corporations operating within SIPCOT industrial parks in the Kanchipuram and Sriperumbudur belt.
+            We proudly supply and manage workforce solutions for multinational corporations and tier-1 suppliers across Tamil Nadu industrial hubs.
           </p>
         </div>
-        <div className="client-grid reveal">
+
+        <div className="client-grid stagger-parent">
           {clients.map((c, i) => (
-            <div key={i} className="client-card">
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-                <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: "linear-gradient(135deg,#ede9fe,#fce7f3)", display: "grid", placeItems: "center", fontWeight: 900, fontSize: "17px", color: "var(--violet)", flexShrink: 0 }}>
+            <div key={i} className="client-card stagger-child">
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+                <div className="client-avatar">
                   {c.name[0]}
                 </div>
                 <div>
-                  <div className="client-name" style={{ fontSize: "16px" }}>{c.name}</div>
+                  <div className="client-name" style={{ fontSize: "17px" }}>{c.name}</div>
                   <div className="client-sub">{c.sub}</div>
                 </div>
+              </div>
+              <div style={{ marginBottom: "8px" }}>
+                <span className="client-tag-pill">{c.tag}</span>
               </div>
               <div className="client-addr">
                 <MapPin size={12} style={{ display: "inline", marginRight: "4px", verticalAlign: "middle", color: "var(--violet)" }} />
@@ -297,7 +800,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───── Recruitment Network ───── */}
+      {/* ═══════════════ RECRUITMENT NETWORK ═══════════════ */}
       <section className="network">
         <div className="network-inner">
           <div className="network-copy reveal">
@@ -308,41 +811,55 @@ export default function Home() {
             </p>
             <div className="regions">
               {["Thanjavur", "Mayiladuthurai", "Cuddalore", "Sivagangai", "Tiruvarur", "Pudukkotai", "Thoothukudi", "Nagapattinam"].map((x) => (
-                <span key={x}><MapPin size={14} color="#80edf2" />{x}</span>
+                <span key={x}>
+                  <MapPin size={14} color="#80edf2" /> {x}
+                </span>
               ))}
             </div>
-            <div style={{ marginTop: "28px" }}>
-              <Link href="/network" style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "#caf7fb", fontWeight: 700, fontSize: "15px", borderBottom: "1px solid rgba(202,247,251,0.5)", paddingBottom: "4px" }}>
-                <span>View full district headcount data</span>
-                <ArrowRight size={16} />
+            <div className="network-cta-group">
+              <Link href="/network" className="network-cta-btn">
+                <span>View Full District Headcount Data</span>
+                <span className="network-cta-arrow">
+                  <ArrowRight size={17} />
+                </span>
               </Link>
+              <div className="network-cta-badge">
+                <span className="network-pulse-dot" />
+                <span>19 Districts & 5 Migration States Live</span>
+              </div>
             </div>
           </div>
+
           <div className="network-visual reveal">
-            <div className="orbit o1" />
-            <div className="orbit o2" />
-            <div className="orbit o3" />
-            <div className="network-core">
-              <Network size={42} color="#80edf2" />
-              <b style={{ color: "#fff", marginTop: "4px" }}>Raptor</b>
-              <span>Talent Network</span>
-            </div>
+            <div className="network-orbit-ring o1" />
+            <div className="network-orbit-ring o2" />
+            <div className="network-orbit-ring o3" />
             {[0, 1, 2, 3, 4, 5].map((i) => (
-              <i key={i} style={{ "--i": i } as React.CSSProperties} />
+              <div key={i} className="network-dot" style={{ "--i": i } as React.CSSProperties} />
             ))}
+            <div className="network-core">
+              <Network size={44} color="#80edf2" />
+              <b style={{ color: "#fff", marginTop: "4px", fontSize: "16px" }}>Raptor</b>
+              <span>3,064+ Network</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ───── Process Preview ───── */}
+      {/* ═══════════════ PROCESS PREVIEW ═══════════════ */}
       <section className="section process">
         <div className="section-head reveal">
           <div>
             <div className="section-label">05 / Recruitment Process</div>
-            <h2>A Clear Path from <em>Brief</em> to <em>Factory Floor.</em></h2>
+            <h2>
+              A Clear Path from <em>Brief</em> to <em>Factory Floor.</em>
+            </h2>
           </div>
-          <p>Our structured 8-stage pre-onboarding process ensures every candidate is verified, medically fit, and deployment-ready before day one.</p>
+          <p>
+            Our structured 8-stage pre-onboarding process ensures every candidate is verified, medically fit, and deployment-ready before day one.
+          </p>
         </div>
+
         <div className="process-track">
           <div className="process-line" />
           {["Sourcing", "Screening", "Interview", "Verification", "Medical", "Offer", "Joining", "Onboarding"].map((x, i) => (
@@ -352,20 +869,46 @@ export default function Home() {
             </div>
           ))}
         </div>
+
         <div className="channel-cloud reveal">
-          {["Employee Referrals", "Internal Database", "Online Job Portals", "Social Media", "Campus Drives", "Mega Job Fairs", "Walk-in Interviews", "Community Hiring Camps"].map((x) => (
-            <span key={x}><CheckCircle2 size={15} color="#7457f5" />{x}</span>
+          {[
+            "Employee Referrals",
+            "Internal Database",
+            "Online Job Portals",
+            "Social Media Campaigns",
+            "Campus Drives",
+            "Mega Job Fairs",
+            "Walk-in Interviews",
+            "Community Hiring Camps",
+          ].map((x) => (
+            <span key={x}>
+              <CheckCircle2 size={15} color="#7457f5" /> {x}
+            </span>
           ))}
         </div>
-        <div style={{ marginTop: "28px", textAlign: "center" }}>
-          <Link href="/process" className="text-link" style={{ fontSize: "16px" }}>
-            <span>See full recruitment methodology & SLAs</span>
-            <ArrowRight size={16} />
+
+        <div className="process-cta-wrap reveal">
+          <Link href="/process" className="process-cta-btn">
+            <span>Explore Full Recruitment Methodology & SLAs</span>
+            <span className="process-cta-arrow">
+              <ArrowRight size={18} />
+            </span>
           </Link>
+          <div className="process-cta-meta">
+            <span className="process-meta-item">
+              <Clock size={15} color="#7457f5" />
+              <span><strong>24–72h</strong> Candidate Shortlist SLA</span>
+            </span>
+            <span className="process-meta-divider">•</span>
+            <span className="process-meta-item">
+              <ShieldCheck size={15} color="#10b981" />
+              <span><strong>100%</strong> Pre-Screened & Compliant</span>
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* ───── CTA ───── */}
+      {/* ═══════════════ CALL TO ACTION ═══════════════ */}
       <section className="cta-section">
         <div className="cta-panel reveal">
           <div>
@@ -381,14 +924,33 @@ export default function Home() {
                 <span>Send Manpower Brief</span>
                 <ArrowRight size={18} />
               </Link>
-              <Link href="/process" style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "#fff", border: "1px solid rgba(255,255,255,0.4)", padding: "14px 20px", borderRadius: "15px", fontWeight: 700, fontSize: "14px" }}>
+              <Link
+                href="/process"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  color: "#fff",
+                  border: "1px solid rgba(255,255,255,0.4)",
+                  padding: "14px 20px",
+                  borderRadius: "15px",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                }}
+              >
                 <span>Our Hiring Process</span>
                 <ArrowRight size={16} />
               </Link>
             </div>
             <div style={{ marginTop: "14px" }}>
-              <p><Building2 size={18} style={{ flexShrink: 0 }} /><span>Head Office: No. 6, First Floor, Gandhi Road, Kanchipuram – 631501</span></p>
-              <p style={{ marginTop: "8px" }}><MapPin size={18} style={{ flexShrink: 0 }} /><span>Branch: No.365/2C, Vijay Complex (F02), Walajabad Road, Sunguvarchatram – 602106</span></p>
+              <p>
+                <Building2 size={18} style={{ flexShrink: 0 }} />
+                <span>Head Office: No. 6, First Floor, Gandhi Road, Kanchipuram – 631501</span>
+              </p>
+              <p style={{ marginTop: "8px" }}>
+                <MapPin size={18} style={{ flexShrink: 0 }} />
+                <span>Branch: No.365/2C, Vijay Complex (F02), Walajabad Road, Sunguvarchatram – 602106</span>
+              </p>
             </div>
           </div>
         </div>

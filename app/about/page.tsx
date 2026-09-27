@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
-import CTASection from "@/components/CTASection";
+import AboutHeroSection from "@/components/AboutHeroSection";
+import VisionMissionSection from "@/components/VisionMissionSection";
+import OrganisationalStructureSection from "@/components/OrganisationalStructureSection";
 import {
   ArrowRight,
   BadgeCheck,
@@ -108,19 +109,8 @@ export default function AboutPage() {
 
   return (
     <main>
-      <PageHero
-        badge="About Raptor Staffing Solutions"
-        title="A Trusted Manpower Partner for"
-        highlightedText="Tamil Nadu's Manufacturing Industry"
-        description="Simplifying the hiring process for manufacturing plants, industrial companies, and service businesses by connecting them with qualified, compliant, and motivated candidates across all workforce categories."
-        breadcrumbCurrent="About Us"
-        actionButton={
-          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-            <Link href="/contact" className="primary"><span>Request Manpower Proposal</span><ArrowRight size={16} /></Link>
-            <Link href="/services" className="secondary-btn"><span>Our Services</span></Link>
-          </div>
-        }
-      />
+      <AboutHeroSection />
+
 
       {/* Company Overview */}
       <section className="section" style={{ background: "#fff" }}>
@@ -147,8 +137,15 @@ export default function AboutPage() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <div style={{ background: "linear-gradient(145deg,#f8f6ff,#f3fcff)", borderRadius: "28px", padding: "36px", border: "1px solid rgba(116,87,245,0.15)" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "28px" }}>
+            <div style={{ position: "relative", borderRadius: "22px", overflow: "hidden", aspectRatio: "16 / 10", border: "1px solid var(--line)", boxShadow: "0 10px 30px rgba(50,40,90,0.08)" }}>
+              <img src="/images/industrial_plant.jpg" alt="SIPCOT Industrial Plant Infrastructure" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "12px 18px", background: "linear-gradient(180deg, transparent, rgba(23,32,57,0.85))", color: "#fff", fontSize: "12px", fontWeight: 700 }}>
+                Manufacturing Facilities Supported Across SIPCOT Corridors
+              </div>
+            </div>
+
+            <div style={{ background: "linear-gradient(145deg,#f8f6ff,#f3fcff)", borderRadius: "24px", padding: "28px", border: "1px solid rgba(116,87,245,0.15)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
                 {[
                   { val: "3,064+", label: "Confirmed Headcounts" },
                   { val: "19", label: "Source Districts (TN)" },
@@ -156,56 +153,21 @@ export default function AboutPage() {
                   { val: "6+", label: "Major Industry Clients" },
                 ].map((s, i) => (
                   <div key={i}>
-                    <strong style={{ fontSize: "36px", display: "block", fontWeight: 800, background: "linear-gradient(135deg,var(--violet),var(--pink))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{s.val}</strong>
-                    <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 600 }}>{s.label}</span>
+                    <strong style={{ fontSize: "32px", display: "block", fontWeight: 800, background: "linear-gradient(135deg,var(--violet),var(--pink))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{s.val}</strong>
+                    <span style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 600 }}>{s.label}</span>
                   </div>
                 ))}
               </div>
-            </div>
-            <div style={{ background: "linear-gradient(135deg,#1e1550,#3d2480)", borderRadius: "20px", padding: "24px", color: "#fff" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-                <ShieldCheck size={22} color="#a9f2f5" />
-                <strong style={{ fontSize: "15px" }}>Statutory Compliance Guarantee</strong>
-              </div>
-              <p style={{ margin: 0, fontSize: "13px", lineHeight: 1.6, color: "#d9d4f5" }}>
-                100% compliant under EPF, ESIC, CLRA, Bonus Act, Minimum Wages Act, and Industrial Disputes Act. Monthly compliance dossiers delivered to your desk.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Vision & Mission */}
-      <section className="section" style={{ background: "linear-gradient(180deg,#faf9ff,#f5f9ff)" }}>
-        <div className="section-head">
-          <div>
-            <div className="section-label">Vision & Mission</div>
-            <h2>The Values That <em>Drive Us</em></h2>
-          </div>
-          <p>Our guiding philosophy ensures we remain the preferred manpower partner for Tamil Nadu's growing manufacturing sector.</p>
-        </div>
-        <div className="vision-wrap" style={{ marginTop: "40px" }}>
-          <article>
-            <Target />
-            <small>Our Vision</small>
-            <h3>Provide manpower solutions of standards through value-added services.</h3>
-            <p style={{ color: "var(--muted)", fontSize: "14px", marginTop: "12px", lineHeight: 1.6 }}>
-              To establish Raptor Staffing Solutions amongst the finest players in all departments of our core competency — becoming the benchmark staffing partner for manufacturing industries across Tamil Nadu and beyond.
-            </p>
-          </article>
-          <article>
-            <CheckCircle2 color="#f59e0b" />
-            <small>Our Mission</small>
-            <h3>Deliver the best possible service to clients and workers with efficiency and integrity.</h3>
-            <p style={{ color: "var(--muted)", fontSize: "14px", marginTop: "12px", lineHeight: 1.6 }}>
-              Backed by an infrastructure of expert consultants in respective fields, we aim to be the first choice of the manufacturing industry — providing an unrivalled blend of knowledge and cross-border skills across Tamil Nadu.
-            </p>
-          </article>
-        </div>
-      </section>
+      <VisionMissionSection />
 
       {/* Leadership Team */}
-      <section className="section" style={{ background: "#fff" }}>
+      <section className="section" id="leadership" style={{ background: "#fff" }}>
         <div className="section-head">
           <div>
             <div className="section-label">Our Leadership</div>
@@ -229,38 +191,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Org Chart */}
-      <section className="section" style={{ background: "linear-gradient(180deg,#faf9ff,#f5f9ff)" }}>
-        <div className="section-head" style={{ marginBottom: "10px" }}>
-          <div>
-            <div className="section-label">Organisational Structure</div>
-            <h2>How We Operate — <em>Our Team Setup</em></h2>
-          </div>
-          <p>A lean, functional organisation built for rapid response and quality delivery across every manpower engagement.</p>
-        </div>
-        <div className="org-chart">
-          <div className="org-node-top">Proprietor</div>
-          <div className="org-line" />
-          <div className="org-level">
-            <div className="org-node accent">General Manager</div>
-          </div>
-          <div className="org-line" />
-          <div className="org-level">
-            <div className="org-node" style={{ minWidth: "200px" }}>
-              <strong style={{ display: "block", marginBottom: "8px", fontSize: "13px", color: "var(--violet)" }}>Sourcing Team</strong>
-              <div style={{ fontSize: "12px", color: "var(--muted)", lineHeight: 1.8 }}>Team Leader<br />Recruiters<br />Field Executives<br />Coordinators<br />Tele-calling</div>
-            </div>
-            <div className="org-node" style={{ minWidth: "200px" }}>
-              <strong style={{ display: "block", marginBottom: "8px", fontSize: "13px", color: "var(--pink)" }}>HR Team</strong>
-              <div style={{ fontSize: "12px", color: "var(--muted)", lineHeight: 1.8 }}>HR Manager<br />HR Executive<br />Payroll / Admin<br />Compliance</div>
-            </div>
-            <div className="org-node" style={{ minWidth: "200px" }}>
-              <strong style={{ display: "block", marginBottom: "8px", fontSize: "13px", color: "var(--cyan-dark)" }}>Business Development</strong>
-              <div style={{ fontSize: "12px", color: "var(--muted)", lineHeight: 1.8 }}>BD Manager<br />Marketing Executive<br />Client Relationship Executive<br />Sales Executive</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Organisational Structure */}
+      <OrganisationalStructureSection />
 
       {/* Execution of Services */}
       <section className="section" style={{ background: "#fff" }}>
@@ -358,12 +290,6 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-
-      <CTASection
-        title="Looking for a reliable manpower partner in Tamil Nadu?"
-        subtitle="Contact our Kanchipuram head office or Sunguvarchatram industrial branch for a customised manpower plan."
-        tagline="Partner With Raptor Staffing"
-      />
     </main>
   );
 }

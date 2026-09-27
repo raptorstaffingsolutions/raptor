@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
-import CTASection from "@/components/CTASection";
+import ServicesHeroSection from "@/components/ServicesHeroSection";
 import {
   ArrowRight,
   BadgeCheck,
@@ -39,7 +38,10 @@ const mainServices = [
     desc: "We supply skilled, semi-skilled, and unskilled workers to manufacturing plants based on exact client requirements — all screened, verified, and ready to deploy.",
     features: ["Production line workers", "Quality inspectors & checkers", "Packing & assembly operators", "Supervisors & team leaders", "Housekeeping & facility staff"],
     tone: "violet",
-    id: "manpower",
+    id: "industrial",
+    aliasId: "manpower",
+    image: "/images/factory_assembly.jpg",
+    imageCaption: "Assembly Line & Manufacturing Workforce",
   },
   {
     icon: GraduationCap,
@@ -48,6 +50,8 @@ const mainServices = [
     features: ["College campus drives", "Mega walk-in job fairs", "Community hiring camps", "ITI & polytechnic tie-ups", "Online job portal sourcing"],
     tone: "sky",
     id: "recruitment",
+    image: "/images/campus_recruitment.jpg",
+    imageCaption: "Campus Drives Across 81+ Partnered Colleges",
   },
   {
     icon: HeartHandshake,
@@ -55,7 +59,10 @@ const mainServices = [
     desc: "From induction to payroll — we manage the complete HR lifecycle for every deployed worker so your team can focus on production, not administration.",
     features: ["Employee induction & on-boarding", "Salary & payroll processing", "PF, ESI, TDS deductions", "Attendance & shift tracking", "Leave & helpdesk management"],
     tone: "rose",
-    id: "hr",
+    id: "payroll",
+    aliasId: "hr",
+    image: "/images/training_safety.jpg",
+    imageCaption: "Pre-Deployment Safety & Induction Training",
   },
   {
     icon: ShieldCheck,
@@ -64,25 +71,16 @@ const mainServices = [
     features: ["PF / ESI registration & filing", "Bonus Act administration", "Labour Law compliance reports", "Self-assessment audit (SAA)", "240-day service management"],
     tone: "amber",
     id: "compliance",
+    image: "/images/industrial_plant.jpg",
+    imageCaption: "Audit-Ready Across All SIPCOT Facilities",
   },
 ];
 
 export default function ServicesPage() {
   return (
     <main>
-      <PageHero
-        badge="Our Staffing Services"
-        title="Complete Workforce Solutions for"
-        highlightedText="Tamil Nadu's Manufacturing Plants"
-        description="From sourcing and screening to payroll and statutory compliance — Raptor Staffing Solutions manages the complete manpower lifecycle so your production lines never stop."
-        breadcrumbCurrent="Services"
-        actionButton={
-          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-            <Link href="/contact" className="primary"><span>Request a Quote</span><ArrowRight size={16} /></Link>
-            <Link href="/process" className="secondary-btn"><span>Our Process</span></Link>
-          </div>
-        }
-      />
+      <ServicesHeroSection />
+
 
       {/* Core Services */}
       <section className="section" style={{ background: "#fff" }}>
@@ -94,36 +92,146 @@ export default function ServicesPage() {
           <p>We are designed to be a single-point solution for your complete workforce requirements — from sourcing to post-deployment management.</p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "28px", marginTop: "48px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "32px", marginTop: "48px" }}>
           {mainServices.map((svc, i) => {
             const Icon = svc.icon;
             return (
-              <div key={svc.id} id={svc.id} className="content-card" style={{ padding: "40px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", alignItems: "start" }}>
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "18px" }}>
-                    <div style={{
-                      width: "54px", height: "54px", borderRadius: "18px",
-                      background: svc.tone === "violet" ? "linear-gradient(135deg,#ede9fe,#ddd6fe)" :
-                        svc.tone === "sky" ? "linear-gradient(135deg,#e0f9fd,#bae8f1)" :
-                          svc.tone === "rose" ? "linear-gradient(135deg,#ffe4f0,#fecee4)" :
-                            "linear-gradient(135deg,#fef3c7,#fde68a)",
-                      display: "grid", placeItems: "center",
-                    }}>
-                      <Icon size={26} color={svc.tone === "violet" ? "#6d28d9" : svc.tone === "sky" ? "#0c8ca4" : svc.tone === "rose" ? "#db2777" : "#d97706"} />
+              <div
+                key={svc.id}
+                id={svc.id}
+                className="content-card"
+                style={{
+                  padding: "0",
+                  overflow: "hidden",
+                  display: "grid",
+                  gridTemplateColumns: "360px 1fr 1fr",
+                  gap: "0",
+                  alignItems: "stretch",
+                  position: "relative",
+                  borderRadius: "28px",
+                }}
+              >
+                {svc.aliasId && <span id={svc.aliasId} style={{ position: "absolute", top: 0 }} />}
+
+                {/* Left: Image Banner */}
+                <div style={{ position: "relative", minHeight: "260px", background: "#172039" }}>
+                  <img
+                    src={svc.image}
+                    alt={svc.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(180deg, transparent 40%, rgba(23,32,57,0.85) 100%)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "16px",
+                      left: "18px",
+                      right: "18px",
+                      color: "#fff",
+                      fontSize: "12px",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {svc.imageCaption}
+                  </div>
+                </div>
+
+                {/* Middle: Title & Description */}
+                <div style={{ padding: "34px 28px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "14px",
+                        background:
+                          svc.tone === "violet"
+                            ? "linear-gradient(135deg,#ede9fe,#ddd6fe)"
+                            : svc.tone === "sky"
+                            ? "linear-gradient(135deg,#e0f9fd,#bae8f1)"
+                            : svc.tone === "rose"
+                            ? "linear-gradient(135deg,#ffe4f0,#fecee4)"
+                            : "linear-gradient(135deg,#fef3c7,#fde68a)",
+                        display: "grid",
+                        placeItems: "center",
+                      }}
+                    >
+                      <Icon
+                        size={22}
+                        color={
+                          svc.tone === "violet"
+                            ? "#6d28d9"
+                            : svc.tone === "sky"
+                            ? "#0c8ca4"
+                            : svc.tone === "rose"
+                            ? "#db2777"
+                            : "#d97706"
+                        }
+                      />
                     </div>
                     <div>
-                      <div style={{ fontSize: "11px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--muted)", marginBottom: "4px" }}>0{i + 1}</div>
-                      <h3 style={{ margin: 0, fontSize: "22px", fontWeight: 800 }}>{svc.title}</h3>
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: 800,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                          color: "var(--muted)",
+                        }}
+                      >
+                        0{i + 1}
+                      </div>
+                      <h3 style={{ margin: 0, fontSize: "20px", fontWeight: 800 }}>{svc.title}</h3>
                     </div>
                   </div>
-                  <p style={{ color: "var(--muted)", lineHeight: 1.7, marginTop: "0", marginBottom: "0", fontSize: "15px" }}>{svc.desc}</p>
+                  <p style={{ color: "var(--muted)", lineHeight: 1.65, margin: 0, fontSize: "14px" }}>
+                    {svc.desc}
+                  </p>
                 </div>
-                <div>
-                  <p style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--muted)", marginBottom: "16px" }}>What's included</p>
-                  <ul style={{ padding: 0, margin: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
+
+                {/* Right: What's Included */}
+                <div
+                  style={{
+                    padding: "34px 28px",
+                    background: "#fafbff",
+                    borderLeft: "1px solid var(--line)",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 800,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      color: "var(--muted)",
+                      margin: "0 0 14px",
+                    }}
+                  >
+                    What's included
+                  </p>
+                  <ul style={{ padding: 0, margin: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
                     {svc.features.map((f) => (
-                      <li key={f} style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "14px", fontWeight: 600, color: "#334155" }}>
-                        <BadgeCheck size={16} color="#7457f5" style={{ flexShrink: 0 }} /> {f}
+                      <li
+                        key={f}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          fontSize: "13.5px",
+                          fontWeight: 600,
+                          color: "#334155",
+                        }}
+                      >
+                        <BadgeCheck size={15} color="#7457f5" style={{ flexShrink: 0 }} /> {f}
                       </li>
                     ))}
                   </ul>
@@ -161,6 +269,7 @@ export default function ServicesPage() {
               icon: HeartHandshake,
               title: "Employee Welfare & Relations",
               color: "#0c8ca4",
+              id: "welfare",
               points: ["On-site worker welfare monitoring", "Grievance redressal and help desk support", "Worker counselling and motivation programmes", "Social security benefit registration and guidance"],
             },
             {
@@ -172,7 +281,7 @@ export default function ServicesPage() {
           ].map((item, i) => {
             const Icon = item.icon;
             return (
-              <div key={i} className="content-card" style={{ padding: "32px" }}>
+              <div key={i} id={item.id} className="content-card" style={{ padding: "32px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
                   <div style={{ width: "48px", height: "48px", borderRadius: "14px", background: "#f4edff", display: "grid", placeItems: "center" }}>
                     <Icon size={24} color={item.color} />
@@ -224,8 +333,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 240-Day Rule */}
-      <section className="section" style={{ background: "linear-gradient(135deg,#1e1550 0%,#2a1560 50%,#3d2480 100%)", color: "#fff", borderRadius: "32px", margin: "0 max(4vw,20px) 60px" }}>
+      {/* 240-Day Rule / Contract Staffing */}
+      <section id="contract" className="section" style={{ background: "linear-gradient(135deg,#1e1550 0%,#2a1560 50%,#3d2480 100%)", color: "#fff", borderRadius: "32px", margin: "0 max(4vw,20px) 60px" }}>
         <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
           <div className="section-label light">Industrial Disputes Act Compliance</div>
           <h2 style={{ color: "#fff" }}>The <em style={{ color: "#a78bfa" }}>240-Day Rule</em> — Managed Correctly</h2>
@@ -275,12 +384,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      <CTASection
-        title="Need a customised manpower plan for your facility?"
-        subtitle="Tell us your headcount requirement, skill categories, and timeline. We'll send a tailored proposal within 24 hours."
-        tagline="Request a Service Proposal"
-      />
     </main>
   );
 }

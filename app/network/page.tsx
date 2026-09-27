@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
+import NetworkHeroSection from "@/components/NetworkHeroSection";
 import CTASection from "@/components/CTASection";
 import { ArrowRight, GraduationCap, Map, MapPin, Users } from "lucide-react";
 
@@ -82,19 +82,8 @@ const branches = [
 export default function NetworkPage() {
   return (
     <main>
-      <PageHero
-        badge="Recruitment Network"
-        title="3,064+ Confirmed Headcounts Across"
-        highlightedText="19 Districts in Tamil Nadu"
-        description="We maintain an active, district-mapped recruitment network across Tamil Nadu and five interstate migration states — delivering consistent quality manpower to manufacturing facilities in the SIPCOT industrial belt."
-        breadcrumbCurrent="Our Network"
-        actionButton={
-          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-            <Link href="/contact" className="primary"><span>Request Headcount Plan</span><ArrowRight size={16} /></Link>
-            <Link href="/process" className="secondary-btn"><span>Recruitment Process</span></Link>
-          </div>
-        }
-      />
+      <NetworkHeroSection />
+
 
       {/* Network Stats */}
       <section className="section" style={{ background: "#fff" }}>
@@ -126,7 +115,7 @@ export default function NetworkPage() {
       </section>
 
       {/* District-wise Headcount Table */}
-      <section className="section" style={{ background: "linear-gradient(180deg,#faf9ff,#f5f9ff)" }}>
+      <section className="section" id="districts" style={{ background: "linear-gradient(180deg,#faf9ff,#f5f9ff)" }}>
         <div className="section-head">
           <div>
             <div className="section-label">District-Wise Headcount Data</div>
@@ -170,7 +159,7 @@ export default function NetworkPage() {
       </section>
 
       {/* Interstate Migration */}
-      <section className="section" style={{ background: "linear-gradient(135deg,#1e1550 0%,#2a1560 50%,#3d2480 100%)", borderRadius: "32px", margin: "0 max(4vw,20px) 60px" }}>
+      <section className="section" id="migration" style={{ background: "linear-gradient(135deg,#1e1550 0%,#2a1560 50%,#3d2480 100%)", borderRadius: "32px", margin: "0 max(4vw,20px) 60px" }}>
         <div style={{ maxWidth: "960px", margin: "0 auto" }}>
           <div className="section-label light">Interstate Migration Network</div>
           <h2 style={{ color: "#fff", marginBottom: "14px" }}>Beyond Tamil Nadu — <em style={{ color: "#a78bfa" }}>Multi-State Sourcing</em></h2>
@@ -203,7 +192,7 @@ export default function NetworkPage() {
       </section>
 
       {/* College Network */}
-      <section className="section" style={{ background: "#fff" }}>
+      <section className="section" id="colleges" style={{ background: "#fff" }}>
         <div className="section-head">
           <div>
             <div className="section-label">College Partnership Network</div>
@@ -293,7 +282,7 @@ export default function NetworkPage() {
       </section>
 
       {/* Branch Offices */}
-      <section className="section" style={{ background: "#fff" }}>
+      <section className="section" id="branches" style={{ background: "#fff" }}>
         <div className="section-head">
           <div>
             <div className="section-label">Our Office Locations</div>
