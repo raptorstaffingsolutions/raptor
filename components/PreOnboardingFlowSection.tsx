@@ -418,48 +418,50 @@ export default function PreOnboardingFlowSection() {
         </div>
 
         {/* Interactive Step Track (Conduit) */}
-        <div className="flow-stepper-track-wrap">
-          <div className="flow-conduit-line" />
-          <div
-            className="flow-conduit-fill"
-            style={{
-              width: `${((activeStageIndex + 1) / STAGES.length) * 100}%`,
-            }}
-          />
-          <div className="flow-stepper-track">
-            {STAGES.map((s, idx) => {
-              const StepIcon = s.icon;
-              const isActive = idx === activeStageIndex;
-              const isPassed = idx < activeStageIndex;
-              return (
-                <button
-                  key={s.num}
-                  type="button"
-                  onClick={() => handleSelectStage(idx)}
-                  className={`flow-stepper-btn ${isActive ? "active" : ""} ${isPassed ? "passed" : ""}`}
-                  style={{
-                    borderColor: isActive ? s.color : isPassed ? "rgba(116, 87, 245, 0.35)" : "var(--line)",
-                    boxShadow: isActive ? `0 10px 26px ${s.bgGlow}, 0 0 0 1px ${s.color}` : "0 4px 14px rgba(50, 40, 90, 0.04)",
-                  }}
-                  title={`Stage ${s.num}: ${s.title}`}
-                >
-                  <div
-                    className="flow-stepper-icon-disc"
+        <div className="flow-stepper-scroll-area">
+          <div className="flow-stepper-track-wrap">
+            <div className="flow-conduit-line" />
+            <div
+              className="flow-conduit-fill"
+              style={{
+                width: `${((activeStageIndex + 1) / STAGES.length) * 100}%`,
+              }}
+            />
+            <div className="flow-stepper-track">
+              {STAGES.map((s, idx) => {
+                const StepIcon = s.icon;
+                const isActive = idx === activeStageIndex;
+                const isPassed = idx < activeStageIndex;
+                return (
+                  <button
+                    key={s.num}
+                    type="button"
+                    onClick={() => handleSelectStage(idx)}
+                    className={`flow-stepper-btn ${isActive ? "active" : ""} ${isPassed ? "passed" : ""}`}
                     style={{
-                      background: isActive
-                        ? `linear-gradient(135deg, ${s.color}, #5938da)`
-                        : isPassed
-                        ? "linear-gradient(135deg, rgba(116, 87, 245, 0.12), rgba(241, 92, 164, 0.12))"
-                        : "#f4f1fd",
+                      borderColor: isActive ? s.color : isPassed ? "rgba(116, 87, 245, 0.35)" : "var(--line)",
+                      boxShadow: isActive ? `0 10px 26px ${s.bgGlow}, 0 0 0 1px ${s.color}` : "0 4px 14px rgba(50, 40, 90, 0.04)",
                     }}
+                    title={`Stage ${s.num}: ${s.title}`}
                   >
-                    <StepIcon size={16} color={isActive ? "#fff" : isPassed ? "#7457f5" : "#65708b"} />
-                  </div>
-                  <span className="flow-stepper-num" style={{ color: isActive ? s.color : undefined }}>{s.num}</span>
-                  <span className="flow-stepper-name">{s.title.split(" ")[0]}</span>
-                </button>
-              );
-            })}
+                    <div
+                      className="flow-stepper-icon-disc"
+                      style={{
+                        background: isActive
+                          ? `linear-gradient(135deg, ${s.color}, #5938da)`
+                          : isPassed
+                          ? "linear-gradient(135deg, rgba(116, 87, 245, 0.12), rgba(241, 92, 164, 0.12))"
+                          : "#f4f1fd",
+                      }}
+                    >
+                      <StepIcon size={16} color={isActive ? "#fff" : isPassed ? "#7457f5" : "#65708b"} />
+                    </div>
+                    <span className="flow-stepper-num" style={{ color: isActive ? s.color : undefined }}>{s.num}</span>
+                    <span className="flow-stepper-name">{s.title.split(" ")[0]}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 

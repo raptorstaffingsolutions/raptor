@@ -1399,18 +1399,22 @@ button{cursor:pointer}
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  .flow-stepper-track {
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: 12px;
+  .flow-stepper-scroll-area {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
   }
-  .flow-conduit-line,
-  .flow-conduit-fill {
-    display: none;
+  .flow-stepper-track-wrap {
+    min-width: 860px; /* Ensure 8 steps have enough space */
   }
 }
 @media (max-width: 768px) {
   .flow-section {
     padding: 80px 18px;
+  }
+  .flow-stepper-scroll-area {
+    margin: 0 -18px;
+    padding: 10px 18px 20px;
   }
   .flow-spotlight-card {
     padding: 28px 20px;
@@ -1429,13 +1433,6 @@ button{cursor:pointer}
   }
   .flow-metrics-row {
     grid-template-columns: 1fr;
-  }
-  .flow-stepper-track {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-  }
-  .flow-stepper-name {
-    display: none;
   }
   .flow-bottom-cta {
     flex-direction: column;
