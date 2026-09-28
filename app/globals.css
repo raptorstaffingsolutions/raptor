@@ -6944,8 +6944,8 @@ html, body {
   .services-grid{grid-template-columns:repeat(2,1fr)}
   .grid-4{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr;gap:35px}
-  .process-track{grid-template-columns:repeat(4,1fr);row-gap:36px}
-  .process-line{display:none}
+  .process-scroll-area{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -18px;padding:0 18px 20px;}
+  .process-track{min-width:860px;}
   .network-inner{grid-template-columns:1fr}
   .network-visual{min-height:400px;max-width:100%}
   .cta-panel{grid-template-columns:1fr}

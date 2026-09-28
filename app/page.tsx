@@ -860,14 +860,16 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="process-track">
-          <div className="process-line" />
-          {["Sourcing", "Screening", "Interview", "Verification", "Medical", "Offer", "Joining", "Onboarding"].map((x, i) => (
-            <div className="process-step reveal" key={x}>
-              <span>{String(i + 1).padStart(2, "0")}</span>
-              <h3>{x}</h3>
-            </div>
-          ))}
+        <div className="process-scroll-area">
+          <div className="process-track">
+            <div className="process-line" />
+            {["Sourcing", "Screening", "Interview", "Verification", "Medical", "Offer", "Joining", "Onboarding"].map((x, i) => (
+              <div className="process-step reveal" key={x}>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                <h3>{x}</h3>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="channel-cloud reveal">
