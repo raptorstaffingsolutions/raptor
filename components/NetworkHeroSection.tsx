@@ -30,11 +30,17 @@ function NetworkCanvas() {
   const mount = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!mount.current || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!mount.current || (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
     const el = mount.current;
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    } catch (e) {
+      console.warn('WebGL not supported, skipping 3D animation.');
+      return;
+    }
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, el.clientWidth / el.clientHeight, 0.1, 100);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     camera.position.z = 7.5;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(el.clientWidth, el.clientHeight);
