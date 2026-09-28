@@ -327,11 +327,17 @@ export default function Home() {
         );
 
       /* Process line animation */
+      const isMobileProcess = window.innerWidth <= 700;
       gsap.fromTo(
         ".process-line",
-        { scaleX: 0 },
+        { 
+          scaleX: isMobileProcess ? 1 : 0, 
+          scaleY: isMobileProcess ? 0 : 1,
+          transformOrigin: isMobileProcess ? "top center" : "left center"
+        },
         {
           scaleX: 1,
+          scaleY: 1,
           ease: "none",
           scrollTrigger: { trigger: ".process", start: "top 75%", end: "bottom 70%", scrub: 1 },
         }

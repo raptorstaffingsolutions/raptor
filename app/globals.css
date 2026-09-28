@@ -821,12 +821,13 @@ button{cursor:pointer}
   position: absolute;
   top: 36px;
   left: 30px;
+  width: var(--fill-progress);
   height: 4px;
   background: linear-gradient(90deg, #7457f5, #f15ca4);
   box-shadow: 0 0 10px rgba(116, 87, 245, 0.35);
   border-radius: 4px;
   z-index: 2;
-  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .flow-stepper-track {
   display: grid;
@@ -6984,6 +6985,77 @@ html, body {
   .process-cta-btn{width:100%;justify-content:center;padding:15px 20px;font-size:14.5px}
   .process-cta-meta{flex-direction:column;gap:8px}
   .process-meta-divider{display:none}
+  
+  /* Vertical Timeline overrides for Mobile (No Horizontal Scroll) */
+  .process-scroll-area, .flow-stepper-scroll-area {
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+  .process-track {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-left: 10px;
+    margin: 40px 0;
+  }
+  .process-step {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+  .process-step span {
+    flex-shrink: 0;
+  }
+  .process-step h3 {
+    margin-top: 0;
+  }
+  .process-line {
+    display: block !important;
+    width: 2px !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 29px !important;
+  }
+  
+  .flow-stepper-track-wrap {
+    min-width: 0;
+    width: 100%;
+    padding-left: 10px;
+  }
+  .flow-stepper-track {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .flow-stepper-btn {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    padding: 14px;
+    gap: 16px;
+    text-align: left;
+  }
+  .flow-stepper-icon-disc {
+    flex-shrink: 0;
+  }
+  .flow-conduit-line, .flow-conduit-fill {
+    display: block !important;
+    width: 4px !important;
+    left: 32px !important;
+    top: 0 !important;
+  }
+  .flow-conduit-line {
+    height: 100% !important;
+  }
+  .flow-conduit-fill {
+    height: var(--fill-progress) !important;
+  }
+  .flow-stepper-name {
+    display: block !important;
+  }
 }
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}

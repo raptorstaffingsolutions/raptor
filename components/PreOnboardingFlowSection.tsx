@@ -424,8 +424,8 @@ export default function PreOnboardingFlowSection() {
             <div
               className="flow-conduit-fill"
               style={{
-                width: `${((activeStageIndex + 1) / STAGES.length) * 100}%`,
-              }}
+                "--fill-progress": `${((activeStageIndex + 1) / STAGES.length) * 100}%`,
+              } as React.CSSProperties}
             />
             <div className="flow-stepper-track">
               {STAGES.map((s, idx) => {
