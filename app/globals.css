@@ -2580,16 +2580,19 @@ button{cursor:pointer}
   color: #e2e8f0;
 }
 
-.hero h1 {
+.hero h1,
+.hero-h1 {
   font-size: clamp(44px, 5.8vw, 84px);
   line-height: 1.02;
   letter-spacing: -0.04em;
   margin: 0 0 22px;
   font-family: 'Inter', system-ui, sans-serif;
   color: #ffffff;
+  font-weight: 900;
 }
 .hero-title-line {
   display: block;
+  font-weight: 900;
 }
 .gradient-text {
   background: linear-gradient(135deg, #00f0ff 0%, #a78bfa 45%, #f15ca4 90%);
@@ -6959,7 +6962,7 @@ html, body {
   .brand-logo{height:52px;max-width:170px}
   .nav-scrolled .brand-logo{height:44px}
   .hero{min-height:auto;padding:115px 18px 50px}
-  .hero h1{font-size:clamp(38px, 9vw, 52px);line-height:1.02}
+  .hero h1, .hero-h1{font-size:clamp(38px, 9vw, 52px);line-height:1.02}
   .hero-split{gap:28px}
   .hero-badge-float{display:none}
   .hero-tabs-bar{flex-direction:column;gap:4px}

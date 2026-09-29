@@ -401,7 +401,7 @@ export default function Home() {
               <span className="hero-eyebrow-sub">SIPCOT // SRIPERUMBUDUR // ORAGADAM</span>
             </div>
 
-            <h1>
+            <h1 className="hero-h1">
               <span className="hero-title-line">PEOPLE POWER.</span>
               <span className="hero-title-line gradient-text">PLANT PRODUCTIVITY.</span>
             </h1>

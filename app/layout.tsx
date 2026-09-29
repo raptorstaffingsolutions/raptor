@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     "factory workforce supply",
     "payroll compliance",
   ],
+  verification: {
+    google: "xHO1z5NPPt5-2yaE_XcQorqzLQbr0W-adSUTjCWOP1M",
+  },
 };
 
 export default function RootLayout({
