@@ -2465,7 +2465,386 @@ button{cursor:pointer}
 .page-hero p.hero-lede{font-size:clamp(17px,1.8vw,21px);line-height:1.6;color:var(--muted);max-width:760px;margin-bottom:28px}
 .badge-pill{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(116,87,245,.12),rgba(241,92,164,.12));color:var(--violet);border:1px solid rgba(116,87,245,.2);padding:6px 14px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 
-/* Home Hero Section - Cosmic Luxury Redesign */
+/* ═══════════════════════════════════════════════════════════
+   HOME HERO — PROFESSIONAL LIGHT DESIGN
+   ═══════════════════════════════════════════════════════════ */
+.hero-light {
+  background: linear-gradient(160deg, #f0f4ff 0%, #ffffff 50%, #f5f0ff 100%);
+  min-height: 100vh;
+  padding: 120px max(6vw, 24px) 72px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 80% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 15% 80%, rgba(59, 130, 246, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-light-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Left copy ── */
+.hero-light-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.hero-light-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  color: #1d4ed8;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 7px 16px;
+  border-radius: 99px;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+.hero-light-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  flex-shrink: 0;
+  animation: pulseGlow 1.8s infinite;
+}
+.hero-light-h1 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(34px, 4.2vw, 58px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #0f172a;
+  margin: 0 0 18px;
+}
+.hero-light-accent {
+  color: #1d4ed8;
+}
+.hero-light-sub {
+  font-size: clamp(15px, 1.3vw, 17px);
+  line-height: 1.72;
+  color: #475569;
+  max-width: 580px;
+  margin: 0 0 30px;
+}
+
+/* Stats row */
+.hero-light-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 32px;
+  background: #f8faff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 18px 20px;
+  width: fit-content;
+}
+.hero-light-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+.hero-light-stat strong {
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 800;
+  color: #1d4ed8;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.hero-light-stat span {
+  font-size: 11.5px;
+  color: #64748b;
+  font-weight: 600;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+.hero-light-stat-divider {
+  width: 1px;
+  height: 36px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* CTAs */
+.hero-light-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.hero-light-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #1d4ed8;
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.3);
+}
+.hero-light-cta-primary:hover {
+  background: #1e40af;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.38);
+}
+.hero-light-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #1d4ed8 !important;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 13px 24px;
+  border-radius: 10px;
+  border: 1.5px solid #c7d2fe;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.hero-light-cta-secondary:hover {
+  background: #eff6ff;
+  border-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* Trust strip */
+.hero-light-trust {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero-light-trust-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-right: 4px;
+}
+.hero-light-trust-pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 4px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.hero-light-trust-pill:hover {
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+  background: #eff6ff;
+}
+
+/* ── Right carousel ── */
+.hero-light-carousel {
+  position: relative;
+}
+.hero-light-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+  background: #e2e8f0;
+}
+.hero-light-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero-light-img.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+/* Caption overlay */
+.hero-light-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.82) 100%);
+  padding: 48px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: all 0.4s ease;
+}
+.hero-light-caption-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+.hero-light-caption-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.hero-light-caption-desc {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin: 4px 0 6px;
+}
+.hero-light-caption-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6ee7b7;
+}
+
+/* Dots */
+.hero-light-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.hero-light-dot-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+.hero-light-dot-btn.active {
+  width: 28px;
+  border-radius: 5px;
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+.hero-light-dot-btn:hover:not(.active) {
+  border-color: #1d4ed8;
+}
+
+/* Floating credential card */
+.hero-light-cred-card {
+  position: absolute;
+  top: -18px;
+  right: -14px;
+  z-index: 10;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+  animation: floatBadge 5s ease-in-out infinite alternate;
+}
+.hero-light-cred-card strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.hero-light-cred-card span {
+  display: block;
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-light-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-light {
+    padding: 110px 24px 60px;
+  }
+  .hero-light-copy {
+    align-items: flex-start;
+  }
+  .hero-light-cred-card {
+    top: -14px;
+    right: 10px;
+  }
+}
+@media (max-width: 640px) {
+  .hero-light {
+    padding: 100px 16px 50px;
+    min-height: auto;
+  }
+  .hero-light-h1 {
+    font-size: clamp(28px, 7.5vw, 40px);
+  }
+  .hero-light-stats {
+    width: 100%;
+    justify-content: space-around;
+    padding: 14px 10px;
+  }
+  .hero-light-stat {
+    padding: 0 10px;
+  }
+  .hero-light-stat strong {
+    font-size: 18px;
+  }
+  .hero-light-cred-card {
+    display: none;
+  }
+  .hero-light-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-light-cta-primary,
+  .hero-light-cta-secondary {
+    justify-content: center;
+  }
+}
+
+/* Home Hero Section - Cosmic Luxury Redesign (kept for reference, hidden via class swap) */
+
 .hero {
   position: relative;
   min-height: 100vh;

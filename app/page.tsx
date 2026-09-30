@@ -32,31 +32,31 @@ import {
   Star,
 } from "lucide-react";
 
-/* ──────────────── HERO CINEMATIC SLIDES ──────────────── */
+/* ──────────────── HERO CAROUSEL SLIDES ──────────────── */
 const heroSlides = [
   {
-    id: "workforce",
-    title: "Skilled Plant Technicians",
-    subtitle: "Tamil Nadu Industrial Corridor",
-    image: "/images/hero_manufacturing.jpg",
-    caption: "3,064+ Verified Headcounts Across SIPCOT",
-    stat: "24–72h SLA",
-  },
-  {
     id: "assembly",
-    title: "Electronics & Automotive Assembly",
-    subtitle: "Cleanroom & Line Assembly",
-    image: "/images/hero_industrial_park.jpg",
-    caption: "Trained for High-Precision Manufacturing",
-    stat: "Zero Downtime",
+    label: "Assembly Line Staffing",
+    title: "Skilled Plant Technicians",
+    desc: "Verified operators for automotive assembly, electronics manufacturing & precision line work across SIPCOT corridors.",
+    image: "/images/hero_slide_assembly.jpg",
+    stat: "3,064+ Active Workers",
   },
   {
-    id: "logistics",
-    title: "Warehouse & Material Logistics",
-    subtitle: "High-Bay Inventory & Dispatch",
-    image: "/images/hero_warehouse.jpg",
-    caption: "Supply Chain & Dispatch Crews",
-    stat: "100% Verified",
+    id: "recruitment",
+    label: "Volume Recruitment",
+    title: "Rapid Workforce Mobilisation",
+    desc: "Campus drives, walk-in fairs & 81+ college tie-ups across Tamil Nadu to source ITI, diploma & graduate talent.",
+    image: "/images/hero_slide_recruitment.jpg",
+    stat: "81+ College Partners",
+  },
+  {
+    id: "training",
+    label: "Pre-Deployment Training",
+    title: "EHS & Compliance Ready",
+    desc: "Every candidate is safety-inducted, medically cleared & trained on plant discipline before deployment.",
+    image: "/images/hero_slide_training.jpg",
+    stat: "100% Compliant",
   },
 ];
 
@@ -290,46 +290,32 @@ export default function Home() {
         );
       });
 
-      /* Hero timeline - cinematic entry */
+      /* Hero timeline - light professional entry */
       const heroTl = gsap.timeline({ defaults: { ease: "expo.out" } });
       heroTl
-        // Animate the Orbs
-        .fromTo(".orb", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 2, stagger: 0.2, ease: "power3.out" }, 0)
-        // Eyebrow reveal
-        .fromTo(".hero-eyebrow", { y: -30, opacity: 0, filter: "blur(4px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1, delay: 0.1 }, 0)
-        // Title lines dramatic entrance
-        .fromTo(".hero-title-line", 
-          { y: 100, opacity: 0, rotateX: -45, scale: 0.9, transformOrigin: "0% 50%" }, 
-          { y: 0, opacity: 1, rotateX: 0, scale: 1, duration: 1.2, stagger: 0.15, ease: "back.out(1.2)" }, 
-          "-=0.7"
+        // Badge slide down
+        .fromTo(".hero-light-badge", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, 0.1)
+        // Heading slide up
+        .fromTo(".hero-light-h1", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, 0.25)
+        // Sub text
+        .fromTo(".hero-light-sub", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.6")
+        // Stats bar
+        .fromTo(".hero-light-stats", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.55")
+        // Actions
+        .fromTo(".hero-light-actions", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.5")
+        // Trust strip
+        .fromTo(".hero-light-trust", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.45")
+        // Carousel slide in from right
+        .fromTo(".hero-light-carousel",
+          { x: 60, opacity: 0, scale: 0.96 },
+          { x: 0, opacity: 1, scale: 1, duration: 1.1, ease: "power4.out" },
+          0.2
         )
-        // Lede text slide up
-        .fromTo(".hero-lede", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=0.8")
-        // Actions pop in
-        .fromTo(".hero-actions", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.8")
-        // Proof stats scale stagger
-        .fromTo(".hero-proof > div", 
-          { y: 30, opacity: 0, scale: 0.8 }, 
-          { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.1, ease: "elastic.out(1, 0.7)" }, 
-          "-=0.6"
-        )
-        // Visual card dramatic slide + scale + blur reveal
-        .fromTo(".hero-visual-card", 
-          { x: 120, opacity: 0, scale: 0.8, rotateY: 15, filter: "blur(10px)" }, 
-          { x: 0, opacity: 1, scale: 1, rotateY: 0, filter: "blur(0px)", duration: 1.5, ease: "power4.out" }, 
-          "-=1.5"
-        )
-        // Badges pop
-        .fromTo(".hero-badge-float", 
-          { scale: 0, opacity: 0, y: 20 }, 
-          { scale: 1, opacity: 1, y: 0, duration: 0.8, stagger: 0.25, ease: "back.out(2.5)" }, 
-          "-=0.8"
-        )
-        // Client ticker reveal
-        .fromTo(".hero-client-ticker",
-          { y: 25, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" },
-          "-=0.6"
+        // Cred card pop
+        .fromTo(".hero-light-cred-card",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2)" },
+          "-=0.4"
         );
 
       /* Process line animation */
@@ -371,8 +357,6 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  const currentSlide = heroSlides[activeSlide];
-
   const getDeploymentTime = () => {
     if (selectedCount === "25–50 Workers") return "24–48 Hours";
     if (selectedCount === "50–150 Workers") return "48–72 Hours";
@@ -381,192 +365,119 @@ export default function Home() {
 
   return (
     <main ref={root}>
-      {/* ═══════════════ CINEMATIC HERO ═══════════════ */}
-      <section className="hero" id="home">
-        <HeroCanvas />
-        <div className="hero-mesh-grid" />
-        <div className="orb orb-a" />
-        <div className="orb orb-b" />
-        <div className="orb orb-c" />
-        <div className="orb orb-d" />
+      {/* ═══════════════ PROFESSIONAL HERO ═══════════════ */}
+      <section className="hero-light" id="home">
+        <div className="hero-light-container">
 
-        <div className="hero-split">
-          {/* LEFT: Headlines & Telemetry */}
-          <div className="hero-copy">
-            <div className="hero-eyebrow">
-              <span className="hero-live-beacon" />
-              <Sparkles size={14} style={{ color: "#00f0ff" }} />
-              <span>PREMIER INDUSTRIAL WORKFORCE INFRASTRUCTURE</span>
-              <span className="hero-eyebrow-divider">|</span>
-              <span className="hero-eyebrow-sub">SIPCOT // SRIPERUMBUDUR // ORAGADAM</span>
+          {/* LEFT COPY */}
+          <div className="hero-light-copy">
+            <div className="hero-light-badge">
+              <span className="hero-light-dot" />
+              Tamil Nadu&apos;s Premier Manpower Consulting Firm
             </div>
 
-            <h1 className="hero-h1">
-              <span className="hero-title-line">PEOPLE POWER.</span>
-              <span className="hero-title-line gradient-text">PLANT PRODUCTIVITY.</span>
+            <h1 className="hero-light-h1">
+              Workforce Solutions
+              <span className="hero-light-accent"> Built for Industry</span>
             </h1>
 
-            <p className="hero-lede">
-              Raptor Staffing Solutions delivers verified, medically cleared, and 100% statutory-compliant workforce teams for Fortune 500 &amp; Tier-1 manufacturers across Tamil Nadu’s SIPCOT corridors — backed by complete PF, ESI, and zero-defect legal immunity.
+            <p className="hero-light-sub">
+              Raptor Staffing Solutions supplies verified, compliance-ready manpower to Fortune 500 &amp; Tier-1 manufacturers across SIPCOT, Sriperumbudur &amp; Oragadam — with full PF, ESI &amp; CLRA statutory cover.
             </p>
 
-            <div className="hero-actions">
-              <Link href="/contact" className="hero-primary-cta">
-                <span>Deploy Workforce Now</span>
-                <ArrowRight size={18} />
-              </Link>
-              <Link href="/services" className="hero-secondary-cta">
-                <Zap size={16} color="#00f0ff" />
-                <span>Explore Plant Solutions</span>
-              </Link>
-              <div className="hero-sla-pill">
-                <Clock size={14} color="#00f0ff" />
-                <span>24–72h Rapid Mobilisation SLA</span>
+            {/* Stats row */}
+            <div className="hero-light-stats">
+              <div className="hero-light-stat">
+                <strong><AnimatedCounter end={3064} suffix="+" /></strong>
+                <span>Active Workers</span>
+              </div>
+              <div className="hero-light-stat-divider" />
+              <div className="hero-light-stat">
+                <strong><AnimatedCounter end={81} suffix="+" /></strong>
+                <span>College Partners</span>
+              </div>
+              <div className="hero-light-stat-divider" />
+              <div className="hero-light-stat">
+                <strong>100%</strong>
+                <span>Statutory Cover</span>
+              </div>
+              <div className="hero-light-stat-divider" />
+              <div className="hero-light-stat">
+                <strong>24–72h</strong>
+                <span>Deployment SLA</span>
               </div>
             </div>
 
-            <div className="hero-proof">
-              <div className="hero-proof-item">
-                <strong className="hero-proof-value" style={{ color: "#00f0ff" }}>
-                  <AnimatedCounter end={3064} suffix="+" />
-                </strong>
-                <span className="hero-proof-label">Active Headcounts</span>
-                <span className="hero-proof-sub">SIPCOT Plant Deployment</span>
-              </div>
-              <div className="hero-proof-item">
-                <strong className="hero-proof-value" style={{ color: "#a78bfa" }}>
-                  <AnimatedCounter end={19} />
-                </strong>
-                <span className="hero-proof-label">Source Districts</span>
-                <span className="hero-proof-sub">Pan-TN Talent Pipeline</span>
-              </div>
-              <div className="hero-proof-item">
-                <strong className="hero-proof-value" style={{ color: "#f15ca4" }}>
-                  <AnimatedCounter end={81} suffix="+" />
-                </strong>
-                <span className="hero-proof-label">College Tie-Ups</span>
-                <span className="hero-proof-sub">Campus Placement Drives</span>
-              </div>
-              <div className="hero-proof-item">
-                <strong className="hero-proof-value" style={{ color: "#10b981" }}>
-                  <AnimatedCounter end={100} suffix="%" />
-                </strong>
-                <span className="hero-proof-label">Statutory Compliance</span>
-                <span className="hero-proof-sub">Audited PF, ESI &amp; CLRA</span>
-              </div>
+            {/* Actions */}
+            <div className="hero-light-actions">
+              <Link href="/contact" className="hero-light-cta-primary">
+                Get a Workforce Quote
+                <ArrowRight size={17} />
+              </Link>
+              <Link href="/services" className="hero-light-cta-secondary">
+                Our Services
+              </Link>
+            </div>
+
+            {/* Trust logos strip */}
+            <div className="hero-light-trust">
+              <span className="hero-light-trust-label">Trusted by</span>
+              {clients.slice(0, 4).map((c) => (
+                <span key={c.name} className="hero-light-trust-pill">{c.name}</span>
+              ))}
             </div>
           </div>
 
-          {/* RIGHT: Industrial Command Console */}
-          <div className="hero-visual-card">
-            {/* Top Frame Status Header */}
-            <div className="hero-console-header">
-              <div className="hero-console-status">
-                <span className="hero-console-dot" />
-                <span>LIVE INDUSTRIAL FEED // SIPCOT PHASE II</span>
-              </div>
-              <div className="hero-console-cam">
-                FEED {String(activeSlide + 1).padStart(2, "0")} / 03
-              </div>
-            </div>
-
-            {/* Floating Holographic Badges */}
-            <div className="hero-badge-float badge-top-right">
-              <div className="live-pulse-dot" />
-              <div>
-                <strong style={{ fontSize: "12.5px", color: "#ffffff", display: "block" }}>
-                  100% Labour Law Compliant
-                </strong>
-                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
-                  PF, ESI &amp; Statutory Audited
-                </span>
-              </div>
-            </div>
-
-            <div className="hero-badge-float badge-bottom-left">
-              <ShieldCheck size={20} color="#00f0ff" style={{ flexShrink: 0 }} />
-              <div>
-                <strong style={{ fontSize: "12.5px", color: "#ffffff", display: "block" }}>
-                  Tier-1 OEM Trusted Partner
-                </strong>
-                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
-                  Foxconn, Motherson &amp; KYOWA
-                </span>
-              </div>
-            </div>
-
-            <div className="hero-badge-float badge-mid-right">
-              <Award size={18} color="#f15ca4" style={{ flexShrink: 0 }} />
-              <div>
-                <strong style={{ fontSize: "12.5px", color: "#ffffff", display: "block" }}>
-                  Zero Candidate Fees
-                </strong>
-                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
-                  Ethical Employer Model
-                </span>
-              </div>
-            </div>
-
-            {/* Main Visual Display Frame with HUD brackets */}
-            <div className="hero-main-img-wrap">
-              <div className="hero-hud-bracket bracket-tl" />
-              <div className="hero-hud-bracket bracket-tr" />
-              <div className="hero-hud-bracket bracket-bl" />
-              <div className="hero-hud-bracket bracket-br" />
-
+          {/* RIGHT CAROUSEL */}
+          <div className="hero-light-carousel">
+            {/* Image slides */}
+            <div className="hero-light-img-wrap">
               {heroSlides.map((slide, idx) => (
                 <Image
                   key={slide.id}
                   src={slide.image}
                   alt={slide.title}
-                  width={800}
-                  height={500}
+                  width={900}
+                  height={600}
                   priority={idx === 0}
-                  className={`hero-main-img ${activeSlide === idx ? "active" : ""}`}
+                  className={`hero-light-img ${activeSlide === idx ? "active" : ""}`}
                 />
               ))}
-              <div className="hero-img-gradient-overlay" />
-              <div className="hero-img-caption">
-                <div>
-                  <span>{currentSlide.subtitle}</span>
-                  <strong>{currentSlide.title}</strong>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <span style={{ color: "#00f0ff", fontWeight: 800 }}>{currentSlide.stat}</span>
-                  <div style={{ fontSize: "11px", opacity: 0.9 }}>{currentSlide.caption}</div>
-                </div>
+              {/* Caption overlay */}
+              <div className="hero-light-caption">
+                <span className="hero-light-caption-label">{heroSlides[activeSlide].label}</span>
+                <strong className="hero-light-caption-title">{heroSlides[activeSlide].title}</strong>
+                <p className="hero-light-caption-desc">{heroSlides[activeSlide].desc}</p>
+                <span className="hero-light-caption-stat">
+                  <ShieldCheck size={14} />{heroSlides[activeSlide].stat}
+                </span>
               </div>
             </div>
 
-            {/* Sector Selector Tabs Bar with Progress */}
-            <div className="hero-tabs-bar">
+            {/* Slide dots */}
+            <div className="hero-light-dots">
               {heroSlides.map((slide, idx) => (
                 <button
                   key={slide.id}
                   type="button"
-                  className={`hero-tab-btn ${activeSlide === idx ? "active" : ""}`}
+                  id={`hero-dot-${idx}`}
+                  className={`hero-light-dot-btn ${activeSlide === idx ? "active" : ""}`}
                   onClick={() => setActiveSlide(idx)}
-                >
-                  {activeSlide === idx && <span className="hero-tab-progress" />}
-                  0{idx + 1}. {slide.title.split(" ")[0]} {slide.title.split(" ")[1] || ""}
-                </button>
+                  aria-label={`View slide: ${slide.title}`}
+                />
               ))}
             </div>
-          </div>
-        </div>
 
-        {/* Client Marquee Strip inside Hero */}
-        <div className="hero-client-ticker">
-          <span className="hero-ticker-label">TRUSTED WORKFORCE PARTNER TO SIPCOT INDUSTRIAL LEADERS</span>
-          <div className="hero-ticker-grid">
-            {clients.map((c) => (
-              <div key={c.name} className="hero-ticker-item">
-                <Building2 size={14} color="#00f0ff" />
-                <span>{c.name}</span>
-                <span className="hero-ticker-tag">{c.tag}</span>
+            {/* Floating credential card */}
+            <div className="hero-light-cred-card">
+              <BadgeCheck size={18} color="#1d4ed8" />
+              <div>
+                <strong>100% PF &amp; ESI Compliant</strong>
+                <span>Statutory Audited | Zero Violations</span>
               </div>
-            ))}
+            </div>
           </div>
+
         </div>
       </section>
 
