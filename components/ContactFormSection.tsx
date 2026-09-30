@@ -255,9 +255,12 @@ export default function ContactFormSection() {
       style={{
         position: "relative",
         padding: "120px max(5vw, 24px)",
-        background: "linear-gradient(180deg, #070514 0%, #0d0928 50%, #070419 100%)",
-        color: "#ffffff",
+        background:
+          "radial-gradient(circle at 14% 18%, rgba(244, 114, 182, 0.16) 0%, transparent 45%), radial-gradient(circle at 86% 22%, rgba(192, 132, 252, 0.18) 0%, transparent 50%), radial-gradient(circle at 50% 88%, rgba(244, 114, 182, 0.12) 0%, transparent 45%), linear-gradient(155deg, #fdf4f8 0%, #faf5ff 38%, #fbf0f7 72%, #f5f3ff 100%)",
+        color: "#1e293b",
         overflow: "hidden",
+        borderTop: "1px solid rgba(244, 114, 182, 0.18)",
+        borderBottom: "1px solid rgba(192, 132, 252, 0.18)",
       }}
     >
       {/* Ambient Aurora Glows */}
@@ -269,8 +272,9 @@ export default function ContactFormSection() {
           width: "550px",
           height: "550px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0, 240, 255, 0.16) 0%, transparent 70%)",
-          filter: "blur(60px)",
+          background: "radial-gradient(circle, #e9d5ff 0%, transparent 70%)",
+          filter: "blur(90px)",
+          opacity: 0.45,
           pointerEvents: "none",
           zIndex: 1,
         }}
@@ -283,8 +287,9 @@ export default function ContactFormSection() {
           width: "600px",
           height: "600px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(116, 87, 245, 0.2) 0%, transparent 70%)",
-          filter: "blur(70px)",
+          background: "radial-gradient(circle, #fce7f3 0%, transparent 70%)",
+          filter: "blur(90px)",
+          opacity: 0.45,
           pointerEvents: "none",
           zIndex: 1,
         }}
@@ -297,8 +302,9 @@ export default function ContactFormSection() {
           width: "500px",
           height: "500px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(241, 92, 164, 0.14) 0%, transparent 70%)",
-          filter: "blur(60px)",
+          background: "radial-gradient(circle, #fbcfe8 0%, transparent 70%)",
+          filter: "blur(90px)",
+          opacity: 0.45,
           pointerEvents: "none",
           zIndex: 1,
         }}
@@ -310,9 +316,9 @@ export default function ContactFormSection() {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px)",
+            "radial-gradient(rgba(147, 51, 234, 0.10) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
-          opacity: 0.5,
+          opacity: 0.65,
           pointerEvents: "none",
           zIndex: 1,
         }}
@@ -328,35 +334,36 @@ export default function ContactFormSection() {
               gap: "8px",
               padding: "6px 14px",
               borderRadius: "99px",
-              background: "rgba(116, 87, 245, 0.14)",
-              border: "1px solid rgba(116, 87, 245, 0.35)",
-              color: "#a78bfa",
+              background: "#ffffff",
+              border: "1px solid rgba(168, 85, 247, 0.28)",
+              color: "#7c3aed",
               fontSize: "12px",
               fontWeight: 800,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
               marginBottom: "16px",
+              boxShadow: "0 4px 16px rgba(168, 85, 247, 0.10)",
               backdropFilter: "blur(12px)",
             }}
           >
-            <Sparkles size={14} color="#00f0ff" />
+            <Sparkles size={14} color="#db2777" />
             <span>Send a Message</span>
             <span
               style={{
                 width: "4px",
                 height: "4px",
                 borderRadius: "50%",
-                background: "rgba(255,255,255,0.4)",
+                background: "rgba(0,0,0,0.15)",
               }}
             />
-            <span style={{ display: "inline-flex", alignItems: "center", gap: "6px", color: "#10b981" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "6px", color: "#059669" }}>
               <span
                 style={{
                   width: "7px",
                   height: "7px",
                   borderRadius: "50%",
                   background: "#10b981",
-                  boxShadow: "0 0 8px #10b981",
+                  boxShadow: "0 0 8px rgba(16, 185, 129, 0.5)",
                 }}
               />
               DISPATCH DESK ACTIVE • 24-HR SLA
@@ -369,7 +376,7 @@ export default function ContactFormSection() {
               fontWeight: 900,
               letterSpacing: "-0.03em",
               lineHeight: 1.15,
-              color: "#ffffff",
+              color: "#0f172a",
               marginBottom: "16px",
             }}
           >
@@ -377,7 +384,7 @@ export default function ContactFormSection() {
             <em
               style={{
                 fontStyle: "normal",
-                background: "linear-gradient(135deg, #00f0ff 0%, #7457f5 55%, #f15ca4 100%)",
+                background: "linear-gradient(110deg, #7c3aed 0%, #db2777 55%, #9333ea 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -390,7 +397,7 @@ export default function ContactFormSection() {
             style={{
               fontSize: "clamp(15px, 1.25vw, 18px)",
               lineHeight: 1.7,
-              color: "#94a3b8",
+              color: "#475569",
               maxWidth: "760px",
             }}
           >
@@ -419,8 +426,8 @@ export default function ContactFormSection() {
             {/* Live Dispatch Status Pill */}
             <div
               style={{
-                background: "rgba(20, 16, 52, 0.65)",
-                border: "1px solid rgba(0, 240, 255, 0.25)",
+                background: "#ffffff",
+                border: "1px solid rgba(168, 85, 247, 0.25)",
                 borderRadius: "20px",
                 padding: "20px 24px",
                 backdropFilter: "blur(20px)",
@@ -428,7 +435,7 @@ export default function ContactFormSection() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 gap: "16px",
-                boxShadow: "0 8px 30px rgba(0, 0, 0, 0.35)",
+                boxShadow: "0 8px 30px rgba(124, 58, 237, 0.08)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
@@ -437,13 +444,13 @@ export default function ContactFormSection() {
                     width: "44px",
                     height: "44px",
                     borderRadius: "14px",
-                    background: "linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(116, 87, 245, 0.25))",
+                    background: "linear-gradient(135deg, #ede9fe, #fce7f3)",
                     display: "grid",
                     placeItems: "center",
-                    border: "1px solid rgba(0, 240, 255, 0.3)",
+                    border: "1px solid rgba(168, 85, 247, 0.3)",
                   }}
                 >
-                  <Zap size={22} color="#00f0ff" />
+                  <Zap size={22} color="#7c3aed" />
                 </div>
                 <div>
                   <span
@@ -451,14 +458,14 @@ export default function ContactFormSection() {
                       fontSize: "11px",
                       textTransform: "uppercase",
                       letterSpacing: "0.1em",
-                      color: "#94a3b8",
+                      color: "#64748b",
                       fontWeight: 700,
                       display: "block",
                     }}
                   >
                     Direct Response SLA
                   </span>
-                  <strong style={{ fontSize: "16px", color: "#ffffff", fontWeight: 800 }}>
+                  <strong style={{ fontSize: "16px", color: "#0f172a", fontWeight: 800 }}>
                     Turnaround Within 4 Hours
                   </strong>
                 </div>
@@ -470,11 +477,11 @@ export default function ContactFormSection() {
                   gap: "6px",
                   fontSize: "12px",
                   fontWeight: 700,
-                  color: "#10b981",
-                  background: "rgba(16, 185, 129, 0.12)",
+                  color: "#059669",
+                  background: "#ecfdf5",
                   padding: "5px 12px",
                   borderRadius: "99px",
-                  border: "1px solid rgba(16, 185, 129, 0.3)",
+                  border: "1px solid #a7f3d0",
                 }}
               >
                 <span
@@ -483,7 +490,7 @@ export default function ContactFormSection() {
                     height: "6px",
                     borderRadius: "50%",
                     background: "#10b981",
-                    boxShadow: "0 0 6px #10b981",
+                    boxShadow: "0 0 6px rgba(16, 185, 129, 0.6)",
                   }}
                 />
                 Live
@@ -495,8 +502,8 @@ export default function ContactFormSection() {
               {/* Channel 1: Phone */}
               <div
                 style={{
-                  background: "rgba(22, 17, 56, 0.55)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "#ffffff",
+                  border: "1px solid rgba(226, 232, 240, 0.9)",
                   borderRadius: "20px",
                   padding: "20px 24px",
                   backdropFilter: "blur(18px)",
@@ -504,17 +511,18 @@ export default function ContactFormSection() {
                   alignItems: "center",
                   justifyContent: "space-between",
                   gap: "16px",
+                  boxShadow: "0 4px 18px rgba(0, 0, 0, 0.02)",
                   transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(116, 87, 245, 0.5)";
+                  e.currentTarget.style.borderColor = "rgba(124, 58, 237, 0.5)";
                   e.currentTarget.style.transform = "translateY(-3px)";
-                  e.currentTarget.style.boxShadow = "0 12px 35px rgba(116, 87, 245, 0.2)";
+                  e.currentTarget.style.boxShadow = "0 12px 35px rgba(124, 58, 237, 0.12)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                  e.currentTarget.style.borderColor = "rgba(226, 232, 240, 0.9)";
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.boxShadow = "0 4px 18px rgba(0, 0, 0, 0.02)";
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
@@ -523,20 +531,20 @@ export default function ContactFormSection() {
                       width: "48px",
                       height: "48px",
                       borderRadius: "15px",
-                      background: "linear-gradient(135deg, rgba(116, 87, 245, 0.25), rgba(241, 92, 164, 0.25))",
-                      border: "1px solid rgba(116, 87, 245, 0.35)",
+                      background: "linear-gradient(135deg, #ede9fe, #f5f3ff)",
+                      border: "1px solid #ddd6fe",
                       display: "grid",
                       placeItems: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <Phone size={22} color="#a78bfa" />
+                    <Phone size={22} color="#7c3aed" />
                   </div>
                   <div>
                     <span
                       style={{
                         fontSize: "11px",
-                        color: "#94a3b8",
+                        color: "#64748b",
                         fontWeight: 800,
                         textTransform: "uppercase",
                         letterSpacing: "0.08em",
@@ -550,7 +558,7 @@ export default function ContactFormSection() {
                       style={{
                         fontSize: "17px",
                         fontWeight: 800,
-                        color: "#00f0ff",
+                        color: "#7c3aed",
                         textDecoration: "none",
                         display: "block",
                         marginTop: "2px",
@@ -570,11 +578,11 @@ export default function ContactFormSection() {
                     onClick={() => handleCopy("+91 94441 69546", "phone")}
                     aria-label="Copy phone number"
                     style={{
-                      background: "rgba(255, 255, 255, 0.06)",
-                      border: "1px solid rgba(255, 255, 255, 0.12)",
+                      background: "#f8fafc",
+                      border: "1px solid #e2e8f0",
                       borderRadius: "10px",
                       padding: "8px 12px",
-                      color: copiedKey === "phone" ? "#10b981" : "#cbd5e1",
+                      color: copiedKey === "phone" ? "#059669" : "#475569",
                       fontSize: "12px",
                       fontWeight: 700,
                       cursor: "pointer",
@@ -593,8 +601,8 @@ export default function ContactFormSection() {
               {/* Channel 2: Email */}
               <div
                 style={{
-                  background: "rgba(22, 17, 56, 0.55)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "#ffffff",
+                  border: "1px solid rgba(226, 232, 240, 0.9)",
                   borderRadius: "20px",
                   padding: "20px 24px",
                   backdropFilter: "blur(18px)",
@@ -602,17 +610,18 @@ export default function ContactFormSection() {
                   alignItems: "center",
                   justifyContent: "space-between",
                   gap: "16px",
+                  boxShadow: "0 4px 18px rgba(0, 0, 0, 0.02)",
                   transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(0, 240, 255, 0.5)";
+                  e.currentTarget.style.borderColor = "rgba(219, 39, 119, 0.5)";
                   e.currentTarget.style.transform = "translateY(-3px)";
-                  e.currentTarget.style.boxShadow = "0 12px 35px rgba(0, 240, 255, 0.15)";
+                  e.currentTarget.style.boxShadow = "0 12px 35px rgba(219, 39, 119, 0.12)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                  e.currentTarget.style.borderColor = "rgba(226, 232, 240, 0.9)";
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.boxShadow = "0 4px 18px rgba(0, 0, 0, 0.02)";
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
@@ -621,20 +630,20 @@ export default function ContactFormSection() {
                       width: "48px",
                       height: "48px",
                       borderRadius: "15px",
-                      background: "linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(116, 87, 245, 0.2))",
-                      border: "1px solid rgba(0, 240, 255, 0.35)",
+                      background: "linear-gradient(135deg, #fdf2f8, #fce7f3)",
+                      border: "1px solid #fbcfe8",
                       display: "grid",
                       placeItems: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <Mail size={22} color="#00f0ff" />
+                    <Mail size={22} color="#db2777" />
                   </div>
                   <div>
                     <span
                       style={{
                         fontSize: "11px",
-                        color: "#94a3b8",
+                        color: "#64748b",
                         fontWeight: 800,
                         textTransform: "uppercase",
                         letterSpacing: "0.08em",
@@ -648,7 +657,7 @@ export default function ContactFormSection() {
                       style={{
                         fontSize: "15px",
                         fontWeight: 800,
-                        color: "#38bdf8",
+                        color: "#db2777",
                         textDecoration: "none",
                         display: "block",
                         marginTop: "2px",
@@ -669,11 +678,11 @@ export default function ContactFormSection() {
                     onClick={() => handleCopy("raptorstaffingsolutions@gmail.com", "email")}
                     aria-label="Copy email address"
                     style={{
-                      background: "rgba(255, 255, 255, 0.06)",
-                      border: "1px solid rgba(255, 255, 255, 0.12)",
+                      background: "#f8fafc",
+                      border: "1px solid #e2e8f0",
                       borderRadius: "10px",
                       padding: "8px 12px",
-                      color: copiedKey === "email" ? "#10b981" : "#cbd5e1",
+                      color: copiedKey === "email" ? "#059669" : "#475569",
                       fontSize: "12px",
                       fontWeight: 700,
                       cursor: "pointer",
@@ -692,8 +701,8 @@ export default function ContactFormSection() {
               {/* Channel 3: Address */}
               <div
                 style={{
-                  background: "rgba(22, 17, 56, 0.55)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "#ffffff",
+                  border: "1px solid rgba(226, 232, 240, 0.9)",
                   borderRadius: "20px",
                   padding: "20px 24px",
                   backdropFilter: "blur(18px)",
@@ -701,17 +710,18 @@ export default function ContactFormSection() {
                   alignItems: "center",
                   justifyContent: "space-between",
                   gap: "16px",
+                  boxShadow: "0 4px 18px rgba(0, 0, 0, 0.02)",
                   transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(241, 92, 164, 0.5)";
+                  e.currentTarget.style.borderColor = "rgba(147, 51, 234, 0.5)";
                   e.currentTarget.style.transform = "translateY(-3px)";
-                  e.currentTarget.style.boxShadow = "0 12px 35px rgba(241, 92, 164, 0.15)";
+                  e.currentTarget.style.boxShadow = "0 12px 35px rgba(147, 51, 234, 0.12)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                  e.currentTarget.style.borderColor = "rgba(226, 232, 240, 0.9)";
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.boxShadow = "0 4px 18px rgba(0, 0, 0, 0.02)";
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
@@ -720,20 +730,20 @@ export default function ContactFormSection() {
                       width: "48px",
                       height: "48px",
                       borderRadius: "15px",
-                      background: "linear-gradient(135deg, rgba(241, 92, 164, 0.25), rgba(116, 87, 245, 0.25))",
-                      border: "1px solid rgba(241, 92, 164, 0.35)",
+                      background: "linear-gradient(135deg, #faf5ff, #f3e8ff)",
+                      border: "1px solid #e9d5ff",
                       display: "grid",
                       placeItems: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <MapPin size={22} color="#f472b6" />
+                    <MapPin size={22} color="#9333ea" />
                   </div>
                   <div>
                     <span
                       style={{
                         fontSize: "11px",
-                        color: "#94a3b8",
+                        color: "#64748b",
                         fontWeight: 800,
                         textTransform: "uppercase",
                         letterSpacing: "0.08em",
@@ -746,7 +756,7 @@ export default function ContactFormSection() {
                       style={{
                         fontSize: "15px",
                         fontWeight: 800,
-                        color: "#ffffff",
+                        color: "#0f172a",
                         display: "block",
                         marginTop: "2px",
                       }}
@@ -764,11 +774,11 @@ export default function ContactFormSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    background: "rgba(255, 255, 255, 0.06)",
-                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    background: "#f8fafc",
+                    border: "1px solid #e2e8f0",
                     borderRadius: "10px",
                     padding: "8px 12px",
-                    color: "#cbd5e1",
+                    color: "#475569",
                     fontSize: "12px",
                     fontWeight: 700,
                     textDecoration: "none",
@@ -778,12 +788,12 @@ export default function ContactFormSection() {
                     transition: "all 0.2s ease",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#00f0ff";
-                    e.currentTarget.style.borderColor = "rgba(0, 240, 255, 0.4)";
+                    e.currentTarget.style.color = "#7c3aed";
+                    e.currentTarget.style.borderColor = "rgba(124, 58, 237, 0.4)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "#cbd5e1";
-                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
+                    e.currentTarget.style.color = "#475569";
+                    e.currentTarget.style.borderColor = "#e2e8f0";
                   }}
                 >
                   <span>Map</span>
@@ -796,12 +806,12 @@ export default function ContactFormSection() {
             <div
               style={{
                 position: "relative",
-                background: "linear-gradient(135deg, rgba(28, 20, 74, 0.85) 0%, rgba(17, 12, 48, 0.95) 100%)",
-                border: "1px solid rgba(116, 87, 245, 0.35)",
+                background: "linear-gradient(135deg, #ffffff 0%, #faf5ff 100%)",
+                border: "1px solid rgba(16, 185, 129, 0.3)",
                 borderRadius: "24px",
                 padding: "26px 28px",
                 backdropFilter: "blur(24px)",
-                boxShadow: "0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                boxShadow: "0 10px 30px rgba(16, 185, 129, 0.08)",
                 overflow: "hidden",
               }}
             >
@@ -812,7 +822,7 @@ export default function ContactFormSection() {
                   right: 0,
                   width: "160px",
                   height: "160px",
-                  background: "radial-gradient(circle, rgba(116, 87, 245, 0.2) 0%, transparent 70%)",
+                  background: "radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%)",
                   pointerEvents: "none",
                 }}
               />
@@ -826,7 +836,7 @@ export default function ContactFormSection() {
                     background: "linear-gradient(135deg, #10b981, #059669)",
                     display: "grid",
                     placeItems: "center",
-                    boxShadow: "0 4px 14px rgba(16, 185, 129, 0.4)",
+                    boxShadow: "0 4px 14px rgba(16, 185, 129, 0.3)",
                   }}
                 >
                   <ShieldCheck size={20} color="#ffffff" />
@@ -837,7 +847,7 @@ export default function ContactFormSection() {
                       fontSize: "11px",
                       textTransform: "uppercase",
                       letterSpacing: "0.1em",
-                      color: "#10b981",
+                      color: "#059669",
                       fontWeight: 800,
                     }}
                   >
@@ -848,7 +858,7 @@ export default function ContactFormSection() {
                       display: "block",
                       fontSize: "17px",
                       fontWeight: 800,
-                      color: "#ffffff",
+                      color: "#0f172a",
                     }}
                   >
                     Statutory Compliance Guarantee
@@ -861,7 +871,7 @@ export default function ContactFormSection() {
                   margin: "0 0 16px 0",
                   fontSize: "13.5px",
                   lineHeight: 1.65,
-                  color: "#cbd5e1",
+                  color: "#475569",
                 }}
               >
                 Every engagement comes with full PF, ESI, Bonus Act, and Labour Law compliance — plus monthly compliance reports at no additional cost.
@@ -885,9 +895,9 @@ export default function ContactFormSection() {
                       fontWeight: 700,
                       padding: "4px 10px",
                       borderRadius: "8px",
-                      background: "rgba(16, 185, 129, 0.12)",
-                      border: "1px solid rgba(16, 185, 129, 0.28)",
-                      color: "#34d399",
+                      background: "#ecfdf5",
+                      border: "1px solid #a7f3d0",
+                      color: "#059669",
                     }}
                   >
                     <CheckCircle2 size={12} />
@@ -914,10 +924,11 @@ export default function ContactFormSection() {
                 <div
                   key={i}
                   style={{
-                    background: "rgba(18, 14, 46, 0.45)",
-                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    background: "#ffffff",
+                    border: "1px solid #f1f5f9",
                     borderRadius: "16px",
                     padding: "14px 10px",
+                    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.02)",
                   }}
                 >
                   <strong
@@ -925,12 +936,12 @@ export default function ContactFormSection() {
                       display: "block",
                       fontSize: "18px",
                       fontWeight: 900,
-                      color: i === 0 ? "#00f0ff" : i === 1 ? "#f15ca4" : "#a78bfa",
+                      color: i === 0 ? "#7c3aed" : i === 1 ? "#db2777" : "#9333ea",
                     }}
                   >
                     {stat.val}
                   </strong>
-                  <span style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600 }}>
+                  <span style={{ fontSize: "11px", color: "#64748b", fontWeight: 600 }}>
                     {stat.label}
                   </span>
                 </div>
@@ -943,13 +954,13 @@ export default function ContactFormSection() {
             ref={formCardRef}
             style={{
               position: "relative",
-              background: "rgba(17, 13, 44, 0.72)",
+              background: "#ffffff",
               backdropFilter: "blur(30px)",
-              border: "1px solid rgba(116, 87, 245, 0.3)",
+              border: "1px solid rgba(168, 85, 247, 0.22)",
               borderRadius: "32px",
               padding: "clamp(28px, 4vw, 44px)",
               boxShadow:
-                "0 24px 70px rgba(0, 0, 0, 0.55), 0 0 40px rgba(116, 87, 245, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
+                "0 24px 60px -12px rgba(124, 58, 237, 0.10), 0 4px 20px rgba(0, 0, 0, 0.03)",
               overflow: "hidden",
             }}
           >
@@ -961,8 +972,8 @@ export default function ContactFormSection() {
                 left: "10%",
                 right: "10%",
                 height: "2px",
-                background: "linear-gradient(90deg, transparent, #00f0ff, #7457f5, #f15ca4, transparent)",
-                boxShadow: "0 0 12px rgba(0, 240, 255, 0.8)",
+                background: "linear-gradient(90deg, transparent, #7c3aed, #db2777, #9333ea, transparent)",
+                boxShadow: "0 0 12px rgba(219, 39, 119, 0.4)",
               }}
             />
 
@@ -974,14 +985,14 @@ export default function ContactFormSection() {
                 justifyContent: "space-between",
                 paddingBottom: "20px",
                 marginBottom: "24px",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                borderBottom: "1px solid #f1f5f9",
                 fontSize: "12px",
-                color: "#94a3b8",
+                color: "#64748b",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 700 }}>
-                <Lock size={13} color="#00f0ff" />
-                <span style={{ letterSpacing: "0.06em", color: "#cbd5e1" }}>
+                <Lock size={13} color="#7c3aed" />
+                <span style={{ letterSpacing: "0.06em", color: "#475569" }}>
                   SECURE 256-BIT DISPATCH GATEWAY
                 </span>
               </div>
@@ -989,7 +1000,7 @@ export default function ContactFormSection() {
                 <span style={{ fontSize: "11px", color: "#64748b" }}>Progress:</span>
                 <span
                   style={{
-                    color: totalCompleted >= 5 ? "#10b981" : "#a78bfa",
+                    color: totalCompleted >= 5 ? "#059669" : "#7c3aed",
                     fontWeight: 800,
                   }}
                 >
@@ -1014,13 +1025,13 @@ export default function ContactFormSection() {
                     width: "74px",
                     height: "74px",
                     borderRadius: "50%",
-                    background: "linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.35))",
+                    background: "linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.25))",
                     border: "2px solid #10b981",
-                    color: "#10b981",
+                    color: "#059669",
                     display: "grid",
                     placeItems: "center",
                     marginBottom: "22px",
-                    boxShadow: "0 0 35px rgba(16, 185, 129, 0.4)",
+                    boxShadow: "0 0 35px rgba(16, 185, 129, 0.3)",
                     animation: "pulse 2s infinite",
                   }}
                 >
@@ -1031,7 +1042,7 @@ export default function ContactFormSection() {
                   style={{
                     fontSize: "26px",
                     fontWeight: 900,
-                    color: "#ffffff",
+                    color: "#0f172a",
                     marginBottom: "12px",
                   }}
                 >
@@ -1040,55 +1051,55 @@ export default function ContactFormSection() {
 
                 <p
                   style={{
-                    color: "#cbd5e1",
+                    color: "#475569",
                     fontSize: "15px",
                     lineHeight: 1.65,
                     maxWidth: "460px",
                     marginBottom: "28px",
                   }}
                 >
-                  Thank you, <strong style={{ color: "#00f0ff" }}>{formData.name}</strong>. Your manpower requirement has been forwarded to our team at{" "}
-                  <strong style={{ color: "#a78bfa" }}>{destinationEmail}</strong>.
+                  Thank you, <strong style={{ color: "#7c3aed" }}>{formData.name}</strong>. Your manpower requirement has been forwarded to our team at{" "}
+                  <strong style={{ color: "#db2777" }}>{destinationEmail}</strong>.
                 </p>
 
                 <div
                   style={{
                     width: "100%",
                     maxWidth: "480px",
-                    background: "rgba(10, 7, 28, 0.7)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    background: "#f8fafc",
+                    border: "1px solid #e2e8f0",
                     borderRadius: "20px",
                     padding: "22px",
                     textAlign: "left",
                     marginBottom: "30px",
                     fontSize: "13.5px",
                     lineHeight: 1.8,
-                    color: "#cbd5e1",
+                    color: "#334155",
                   }}
                 >
                   <div>
-                    <strong style={{ color: "#94a3b8" }}>Company:</strong> {formData.company}
+                    <strong style={{ color: "#64748b" }}>Company:</strong> {formData.company}
                   </div>
                   <div>
-                    <strong style={{ color: "#94a3b8" }}>Category:</strong>{" "}
+                    <strong style={{ color: "#64748b" }}>Category:</strong>{" "}
                     {formData.requirement_type || "General Staffing"}
                   </div>
                   {formData.headcount && (
                     <div>
-                      <strong style={{ color: "#94a3b8" }}>Headcount:</strong> {formData.headcount} workers
+                      <strong style={{ color: "#64748b" }}>Headcount:</strong> {formData.headcount} workers
                     </div>
                   )}
                   {formData.timeline && (
                     <div>
-                      <strong style={{ color: "#94a3b8" }}>Timeline:</strong> {formData.timeline}
+                      <strong style={{ color: "#64748b" }}>Timeline:</strong> {formData.timeline}
                     </div>
                   )}
                   <div
                     style={{
                       marginTop: "12px",
                       paddingTop: "12px",
-                      borderTop: "1px dashed rgba(255, 255, 255, 0.15)",
-                      color: "#34d399",
+                      borderTop: "1px dashed #cbd5e1",
+                      color: "#059669",
                       fontWeight: 700,
                       display: "flex",
                       alignItems: "center",
@@ -1104,7 +1115,7 @@ export default function ContactFormSection() {
                   type="button"
                   onClick={handleReset}
                   style={{
-                    background: "linear-gradient(115deg, #6d50ec, #ef60ad)",
+                    background: "linear-gradient(115deg, #7c3aed, #db2777)",
                     color: "#ffffff",
                     border: "none",
                     borderRadius: "16px",
@@ -1112,7 +1123,7 @@ export default function ContactFormSection() {
                     fontSize: "14px",
                     fontWeight: 800,
                     cursor: "pointer",
-                    boxShadow: "0 10px 30px rgba(109, 80, 236, 0.35)",
+                    boxShadow: "0 10px 30px rgba(124, 58, 237, 0.3)",
                     transition: "transform 0.2s ease",
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
@@ -1139,12 +1150,12 @@ export default function ContactFormSection() {
                 {status === "error" && (
                   <div
                     style={{
-                      background: "rgba(225, 29, 72, 0.12)",
+                      background: "rgba(225, 29, 72, 0.08)",
                       border: "1px solid rgba(244, 63, 94, 0.35)",
                       borderRadius: "16px",
                       padding: "18px 20px",
                       marginBottom: "24px",
-                      color: "#fecdd3",
+                      color: "#9f1239",
                       fontSize: "13px",
                       lineHeight: 1.5,
                       backdropFilter: "blur(12px)",
@@ -1157,13 +1168,13 @@ export default function ContactFormSection() {
                         gap: "10px",
                         fontWeight: 800,
                         marginBottom: "6px",
-                        color: "#fb7185",
+                        color: "#e11d48",
                       }}
                     >
                       <AlertCircle size={18} />
                       <span>Could not deliver through Formspree</span>
                     </div>
-                    <p style={{ margin: "0 0 12px 0", color: "#fda4af" }}>{errorMessage}</p>
+                    <p style={{ margin: "0 0 12px 0", color: "#be123c" }}>{errorMessage}</p>
                     <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                       <a
                         href={mailtoLink}
@@ -1188,8 +1199,8 @@ export default function ContactFormSection() {
                         onClick={() => setStatus("idle")}
                         style={{
                           background: "transparent",
-                          border: "1px solid rgba(255, 255, 255, 0.2)",
-                          color: "#ffffff",
+                          border: "1px solid #cbd5e1",
+                          color: "#475569",
                           borderRadius: "10px",
                           padding: "8px 14px",
                           fontSize: "12px",
@@ -1221,7 +1232,7 @@ export default function ContactFormSection() {
                         gap: "6px",
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#cbd5e1",
+                        color: "#1e293b",
                         marginBottom: "8px",
                       }}
                     >
@@ -1241,9 +1252,9 @@ export default function ContactFormSection() {
                         width: "100%",
                         padding: "13px 16px",
                         borderRadius: "14px",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
-                        color: "#ffffff",
+                        background: "#f8fafc",
+                        border: "1px solid #e2e8f0",
+                        color: "#0f172a",
                         fontSize: "14px",
                         outline: "none",
                         transition: "all 0.25s ease",
@@ -1260,11 +1271,11 @@ export default function ContactFormSection() {
                         gap: "6px",
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#cbd5e1",
+                        color: "#1e293b",
                         marginBottom: "8px",
                       }}
                     >
-                      <Building2 size={14} color="#00f0ff" />
+                      <Building2 size={14} color="#7c3aed" />
                       <span>Company Name *</span>
                     </label>
                     <input
@@ -1281,9 +1292,9 @@ export default function ContactFormSection() {
                         width: "100%",
                         padding: "13px 16px",
                         borderRadius: "14px",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
-                        color: "#ffffff",
+                        background: "#f8fafc",
+                        border: "1px solid #e2e8f0",
+                        color: "#0f172a",
                         fontSize: "14px",
                         outline: "none",
                         transition: "all 0.25s ease",
@@ -1310,11 +1321,11 @@ export default function ContactFormSection() {
                         gap: "6px",
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#cbd5e1",
+                        color: "#1e293b",
                         marginBottom: "8px",
                       }}
                     >
-                      <Mail size={14} color="#a78bfa" />
+                      <Mail size={14} color="#db2777" />
                       <span>Email Address *</span>
                     </label>
                     <input
@@ -1331,9 +1342,9 @@ export default function ContactFormSection() {
                         width: "100%",
                         padding: "13px 16px",
                         borderRadius: "14px",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
-                        color: "#ffffff",
+                        background: "#f8fafc",
+                        border: "1px solid #e2e8f0",
+                        color: "#0f172a",
                         fontSize: "14px",
                         outline: "none",
                         transition: "all 0.25s ease",
@@ -1350,11 +1361,11 @@ export default function ContactFormSection() {
                         gap: "6px",
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#cbd5e1",
+                        color: "#1e293b",
                         marginBottom: "8px",
                       }}
                     >
-                      <Phone size={14} color="#f472b6" />
+                      <Phone size={14} color="#9333ea" />
                       <span>Phone Number *</span>
                     </label>
                     <input
@@ -1371,9 +1382,9 @@ export default function ContactFormSection() {
                         width: "100%",
                         padding: "13px 16px",
                         borderRadius: "14px",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
-                        color: "#ffffff",
+                        background: "#f8fafc",
+                        border: "1px solid #e2e8f0",
+                        color: "#0f172a",
                         fontSize: "14px",
                         outline: "none",
                         transition: "all 0.25s ease",
@@ -1400,10 +1411,10 @@ export default function ContactFormSection() {
                         gap: "6px",
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#cbd5e1",
+                        color: "#1e293b",
                       }}
                     >
-                      <Briefcase size={14} color="#00f0ff" />
+                      <Briefcase size={14} color="#7c3aed" />
                       <span>Manpower Category Required *</span>
                     </label>
                   </div>
@@ -1420,23 +1431,23 @@ export default function ContactFormSection() {
                         width: "100%",
                         padding: "13px 40px 13px 16px",
                         borderRadius: "14px",
-                        background: "#16113b",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
-                        color: formData.requirement_type ? "#ffffff" : "#94a3b8",
+                        background: "#f8fafc",
+                        border: "1px solid #e2e8f0",
+                        color: formData.requirement_type ? "#0f172a" : "#64748b",
                         fontSize: "14px",
                         outline: "none",
                         appearance: "none",
                         cursor: "pointer",
                       }}
                     >
-                      <option value="" style={{ background: "#16113b", color: "#94a3b8" }}>
+                      <option value="" style={{ background: "#ffffff", color: "#64748b" }}>
                         Select category
                       </option>
                       {CATEGORY_OPTIONS.map((opt) => (
                         <option
                           key={opt}
                           value={opt}
-                          style={{ background: "#16113b", color: "#ffffff" }}
+                          style={{ background: "#ffffff", color: "#0f172a" }}
                         >
                           {opt}
                         </option>
@@ -1444,7 +1455,7 @@ export default function ContactFormSection() {
                     </select>
                     <ChevronDown
                       size={18}
-                      color="#94a3b8"
+                      color="#64748b"
                       style={{
                         position: "absolute",
                         right: "14px",
@@ -1478,12 +1489,12 @@ export default function ContactFormSection() {
                           onClick={() => handleQuickCategory(chip)}
                           style={{
                             background: isSelected
-                              ? "rgba(0, 240, 255, 0.18)"
-                              : "rgba(255, 255, 255, 0.04)",
+                              ? "#f5f3ff"
+                              : "#f1f5f9",
                             border: `1px solid ${
-                              isSelected ? "#00f0ff" : "rgba(255, 255, 255, 0.1)"
+                              isSelected ? "#7c3aed" : "#e2e8f0"
                             }`,
-                            color: isSelected ? "#00f0ff" : "#94a3b8",
+                            color: isSelected ? "#7c3aed" : "#64748b",
                             padding: "4px 10px",
                             borderRadius: "8px",
                             fontSize: "11px",
@@ -1517,11 +1528,11 @@ export default function ContactFormSection() {
                         gap: "6px",
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#cbd5e1",
+                        color: "#1e293b",
                         marginBottom: "8px",
                       }}
                     >
-                      <Users size={14} color="#10b981" />
+                      <Users size={14} color="#059669" />
                       <span>Headcount Required</span>
                     </label>
                     <input
@@ -1537,9 +1548,9 @@ export default function ContactFormSection() {
                         width: "100%",
                         padding: "13px 16px",
                         borderRadius: "14px",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
-                        color: "#ffffff",
+                        background: "#f8fafc",
+                        border: "1px solid #e2e8f0",
+                        color: "#0f172a",
                         fontSize: "14px",
                         outline: "none",
                       }}
@@ -1555,15 +1566,15 @@ export default function ContactFormSection() {
                           style={{
                             background:
                               formData.headcount === cnt.replace("+", "")
-                                ? "rgba(16, 185, 129, 0.2)"
-                                : "rgba(255, 255, 255, 0.04)",
+                                ? "#ecfdf5"
+                                : "#f1f5f9",
                             border: `1px solid ${
                               formData.headcount === cnt.replace("+", "")
                                 ? "#10b981"
-                                : "rgba(255, 255, 255, 0.08)"
+                                : "#e2e8f0"
                             }`,
                             color:
-                              formData.headcount === cnt.replace("+", "") ? "#34d399" : "#94a3b8",
+                              formData.headcount === cnt.replace("+", "") ? "#059669" : "#64748b",
                             padding: "3px 8px",
                             borderRadius: "6px",
                             fontSize: "10.5px",
@@ -1586,11 +1597,11 @@ export default function ContactFormSection() {
                         gap: "6px",
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#cbd5e1",
+                        color: "#1e293b",
                         marginBottom: "8px",
                       }}
                     >
-                      <Calendar size={14} color="#f472b6" />
+                      <Calendar size={14} color="#db2777" />
                       <span>Required By</span>
                     </label>
                     <div style={{ position: "relative" }}>
@@ -1604,23 +1615,23 @@ export default function ContactFormSection() {
                           width: "100%",
                           padding: "13px 40px 13px 16px",
                           borderRadius: "14px",
-                          background: "#16113b",
-                          border: "1px solid rgba(255, 255, 255, 0.12)",
-                          color: formData.timeline ? "#ffffff" : "#94a3b8",
+                          background: "#f8fafc",
+                          border: "1px solid #e2e8f0",
+                          color: formData.timeline ? "#0f172a" : "#64748b",
                           fontSize: "14px",
                           outline: "none",
                           appearance: "none",
                           cursor: "pointer",
                         }}
                       >
-                        <option value="" style={{ background: "#16113b", color: "#94a3b8" }}>
+                        <option value="" style={{ background: "#ffffff", color: "#64748b" }}>
                           Select timeline
                         </option>
                         {TIMELINE_OPTIONS.map((t) => (
                           <option
                             key={t}
                             value={t}
-                            style={{ background: "#16113b", color: "#ffffff" }}
+                            style={{ background: "#ffffff", color: "#0f172a" }}
                           >
                             {t}
                           </option>
@@ -1628,7 +1639,7 @@ export default function ContactFormSection() {
                       </select>
                       <ChevronDown
                         size={18}
-                        color="#94a3b8"
+                        color="#64748b"
                         style={{
                           position: "absolute",
                           right: "14px",
@@ -1649,7 +1660,7 @@ export default function ContactFormSection() {
                       display: "block",
                       fontSize: "13px",
                       fontWeight: 700,
-                      color: "#cbd5e1",
+                      color: "#1e293b",
                       marginBottom: "8px",
                     }}
                   >
@@ -1667,9 +1678,9 @@ export default function ContactFormSection() {
                       width: "100%",
                       padding: "14px 16px",
                       borderRadius: "14px",
-                      background: "rgba(255, 255, 255, 0.05)",
-                      border: "1px solid rgba(255, 255, 255, 0.12)",
-                      color: "#ffffff",
+                      background: "#f8fafc",
+                      border: "1px solid #e2e8f0",
+                      color: "#0f172a",
                       fontSize: "14px",
                       outline: "none",
                       resize: "vertical",
@@ -1688,7 +1699,7 @@ export default function ContactFormSection() {
                     width: "100%",
                     padding: "16px 24px",
                     borderRadius: "16px",
-                    background: "linear-gradient(115deg, #6d50ec 0%, #a855f7 50%, #ec4899 100%)",
+                    background: "linear-gradient(115deg, #7c3aed 0%, #a855f7 50%, #db2777 100%)",
                     border: "none",
                     color: "#ffffff",
                     fontSize: "15px",
@@ -1699,7 +1710,7 @@ export default function ContactFormSection() {
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "10px",
-                    boxShadow: "0 12px 35px rgba(109, 80, 236, 0.4), 0 0 20px rgba(168, 85, 247, 0.3)",
+                    boxShadow: "0 12px 30px rgba(124, 58, 237, 0.28)",
                     transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                     opacity: status === "submitting" ? 0.8 : 1,
                     overflow: "hidden",
@@ -1708,13 +1719,13 @@ export default function ContactFormSection() {
                     if (status !== "submitting") {
                       e.currentTarget.style.transform = "translateY(-2px)";
                       e.currentTarget.style.boxShadow =
-                        "0 16px 45px rgba(109, 80, 236, 0.55), 0 0 30px rgba(168, 85, 247, 0.5)";
+                        "0 16px 45px rgba(124, 58, 237, 0.4)";
                     }
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";
                     e.currentTarget.style.boxShadow =
-                      "0 12px 35px rgba(109, 80, 236, 0.4), 0 0 20px rgba(168, 85, 247, 0.3)";
+                      "0 12px 30px rgba(124, 58, 237, 0.28)";
                   }}
                 >
                   {status === "submitting" ? (
@@ -1739,13 +1750,13 @@ export default function ContactFormSection() {
                     justifyContent: "center",
                     gap: "8px",
                     fontSize: "12px",
-                    color: "#94a3b8",
+                    color: "#64748b",
                   }}
                 >
-                  <Send size={13} color="#00f0ff" />
+                  <Send size={13} color="#7c3aed" />
                   <span>
                     Submissions are dispatched directly to{" "}
-                    <strong style={{ color: "#ffffff" }}>{destinationEmail}</strong>
+                    <strong style={{ color: "#0f172a" }}>{destinationEmail}</strong>
                   </span>
                 </div>
               </form>

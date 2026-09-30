@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ProcessHeroSection from "@/components/ProcessHeroSection";
-import CTASection from "@/components/CTASection";
 import PreOnboardingFlowSection from "@/components/PreOnboardingFlowSection";
 import {
   ArrowRight,
@@ -197,12 +196,6 @@ export default function ProcessPage() {
           </div>
         </div>
       </section>
-
-      <CTASection
-        title="Ready to streamline your recruitment process?"
-        subtitle="Share your headcount requirement and role details — we'll initiate your structured recruitment cycle within 24 hours."
-        tagline="Launch Your Recruitment Cycle"
-      />
     </main>
   );
 }

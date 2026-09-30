@@ -3,136 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import * as THREE from "three";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
   BadgeCheck,
   Building2,
-  CheckCircle2,
   ChevronRight,
-  Clock,
-  Compass,
-  Factory,
-  FileCheck2,
-  Globe,
-  GraduationCap,
-  Layers,
-  MapPin,
   ShieldCheck,
-  Sparkles,
-  Users,
-  Zap,
-  ArrowUpRight,
 } from "lucide-react";
-
-/* ──────────────── THREE.JS CANVAS FOR ABOUT HERO ──────────────── */
-function AboutCanvas() {
-  const mount = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!mount.current || (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
-    const el = mount.current;
-    let renderer: THREE.WebGLRenderer;
-    try {
-      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    } catch (e) {
-      console.warn('WebGL not supported, skipping 3D animation.');
-      return;
-    }
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, el.clientWidth / el.clientHeight, 0.1, 100);
-    camera.position.z = 7.5;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-    renderer.setSize(el.clientWidth, el.clientHeight);
-    el.appendChild(renderer.domElement);
-
-    // Group 1: Cyan / Aqua Constellation (400 particles)
-    const count1 = 400;
-    const pos1 = new Float32Array(count1 * 3);
-    for (let i = 0; i < count1 * 3; i += 3) {
-      pos1[i] = (Math.random() - 0.5) * 16;
-      pos1[i + 1] = (Math.random() - 0.5) * 10;
-      pos1[i + 2] = (Math.random() - 0.5) * 10;
-    }
-    const geo1 = new THREE.BufferGeometry();
-    geo1.setAttribute("position", new THREE.BufferAttribute(pos1, 3));
-    const mat1 = new THREE.PointsMaterial({
-      size: 0.034,
-      color: 0x00f0ff,
-      transparent: true,
-      opacity: 0.5,
-    });
-    const points1 = new THREE.Points(geo1, mat1);
-    scene.add(points1);
-
-    // Group 2: Violet / Rose Constellation (350 particles)
-    const count2 = 350;
-    const pos2 = new Float32Array(count2 * 3);
-    for (let i = 0; i < count2 * 3; i += 3) {
-      pos2[i] = (Math.random() - 0.5) * 16;
-      pos2[i + 1] = (Math.random() - 0.5) * 10;
-      pos2[i + 2] = (Math.random() - 0.5) * 10;
-    }
-    const geo2 = new THREE.BufferGeometry();
-    geo2.setAttribute("position", new THREE.BufferAttribute(pos2, 3));
-    const mat2 = new THREE.PointsMaterial({
-      size: 0.03,
-      color: 0xa855f7,
-      transparent: true,
-      opacity: 0.42,
-    });
-    const points2 = new THREE.Points(geo2, mat2);
-    scene.add(points2);
-
-    let mouseX = 0;
-    let mouseY = 0;
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 0.35;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 0.35;
-    };
-    window.addEventListener("mousemove", onMouseMove);
-
-    let frame = 0;
-    const draw = () => {
-      points1.rotation.y += 0.0006;
-      points1.rotation.x += 0.00025;
-      points2.rotation.y -= 0.0004;
-      points2.rotation.x -= 0.0002;
-
-      camera.position.x += (mouseX - camera.position.x) * 0.025;
-      camera.position.y += (-mouseY - camera.position.y) * 0.025;
-      camera.lookAt(scene.position);
-
-      renderer.render(scene, camera);
-      frame = requestAnimationFrame(draw);
-    };
-    draw();
-
-    const resize = () => {
-      if (!el) return;
-      camera.aspect = el.clientWidth / el.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(el.clientWidth, el.clientHeight);
-    };
-    window.addEventListener("resize", resize);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", onMouseMove);
-      renderer.dispose();
-      geo1.dispose();
-      mat1.dispose();
-      geo2.dispose();
-      mat2.dispose();
-      renderer.domElement.remove();
-    };
-  }, []);
-
-  return <div className="hero-canvas" ref={mount} aria-hidden="true" />;
-}
 
 /* ──────────────── ANIMATED COUNTER ──────────────── */
 function AnimatedCounter({
@@ -175,432 +53,275 @@ function AnimatedCounter({
   return <span className="counter-val" ref={ref}>{prefix}0{suffix}</span>;
 }
 
-/* ──────────────── TABS DATA ──────────────── */
-const deckTabs = [
+/* ──────────────── HERO CAROUSEL SLIDES ──────────────── */
+const aboutSlides = [
   {
-    id: "moat",
-    tabLabel: "01. Enterprise Advantage",
-    tagline: "ZERO-COST EMPLOYER MODEL",
+    id: "workforce",
+    label: "ZERO-COST EMPLOYER MODEL",
     title: "Zero-Cost Hiring with Zero Statutory Liability",
-    desc: "We supply pre-screened industrial talent across Tamil Nadu at zero recruitment commission to employers, absorbing compliance auditing, medical screenings, and biometrics so you maintain pure production uptime.",
+    desc: "Pre-screened industrial talent supplied across Tamil Nadu at zero recruitment commission to employers, with comprehensive statutory compliance.",
     image: "/images/hero_workforce.jpg",
-    alt: "Raptor Staffing Deployed Workforce in Tamil Nadu",
-    stats: [
-      { label: "Employer Fee", val: "₹0 Free", color: "#10b981" },
-      { label: "Deployment SLA", val: "24–72 Hrs", color: "#00f0ff" },
-      { label: "Legal Immunity", val: "100% PF/ESI", color: "#f15ca4" },
-    ],
-    features: [
-      "No recruitment commissions charged to employer partners",
-      "End-to-end PF, ESI, CLRA & 240-day muster tracking",
-      "On-site coordinators dedicated to attendance & shift rotation",
-    ],
+    stat: "₹0 Employer Fee • 100% PF/ESI Cover",
   },
   {
-    id: "corridors",
-    tabLabel: "02. Industrial Footprint",
-    tagline: "SIPCOT STRATEGIC CORRIDORS",
+    id: "industrial",
+    label: "SIPCOT STRATEGIC CORRIDORS",
     title: "Direct Embedded Presence in Manufacturing Hubs",
-    desc: "Strategically headquartered in Kanchipuram and Sunguvarchatram, positioned minutes away from Foxconn SEZ, Sriperumbudur, Oragadam, and Vallam Vadagal industrial corridors.",
+    desc: "Field command centres in Kanchipuram and Sunguvarchatram, positioned minutes from Foxconn SEZ, Sriperumbudur, Oragadam & Vallam Vadagal.",
     image: "/images/industrial_plant.jpg",
-    alt: "SIPCOT Manufacturing Corridor Tamil Nadu",
-    stats: [
-      { label: "Source Districts", val: "19 Hubs", color: "#00f0ff" },
-      { label: "Active Corridors", val: "4 SIPCOT", color: "#7457f5" },
-      { label: "Field Offices", val: "2 Hubs", color: "#10b981" },
-    ],
-    features: [
-      "Sunguvarchatram & Kanchipuram field command centres",
-      "Sub-1-hour on-site incident response & supervisor coverage",
-      "Pre-mapped transit & bus routes for shift punctuality",
-    ],
+    stat: "4 SIPCOT Corridors • 2 Field Command Hubs",
   },
   {
-    id: "governance",
-    tabLabel: "03. Quality & Screening",
-    tagline: "RIGOROUS PRE-ONBOARDING",
-    title: "Pre-Trained, Medically Cleared & EHS Inducted",
-    desc: "Every candidate undergoes strict Aadhaar biometric screening, past employment verification, government clinic medical exams, and comprehensive 5S / plant safety orientation before step one.",
+    id: "training",
+    label: "QUALITY & SCREENING",
+    title: "Pre-Trained & Medically Cleared",
+    desc: "Strict Aadhaar biometric screening, clinical medical exams, and comprehensive 5S shop-floor safety orientation before candidate deployment.",
     image: "/images/hero_team_training.jpg",
-    alt: "Industrial Workforce Training and Safety Induction",
-    stats: [
-      { label: "Screening Ratio", val: "1 in 3", color: "#f15ca4" },
-      { label: "EHS Certified", val: "100%", color: "#10b981" },
-      { label: "College Alliances", val: "81+ ITI/Dip", color: "#00f0ff" },
-    ],
-    features: [
-      "Biometric Aadhaar & criminal background authentication",
-      "Rigorous medical fitness tests for high-precision assembly lines",
-      "EHS, PPE compliance, and shop-floor discipline training",
-    ],
+    stat: "81+ ITI/Diploma College Tie-Ups",
   },
 ];
 
+const partners = [
+  "Bharat FIH (Foxconn Group)",
+  "KYOWA Aluminium Metal",
+  "KIML (Kyungshin Industrial Motherson)",
+  "Motherson Polymer Solutions",
+  "Rising Stars Hi-Tech",
+  "WOWTEK Mobile Hardware",
+  "SIPCOT Phase-II Sunguvarchatram",
+  "Oragadam Industrial Growth Center",
+  "Sriperumbudur Vallam Vadagal",
+  "100% PF & ESI Statutory Compliance",
+  "Bharat FIH (Foxconn Group)",
+  "KYOWA Aluminium Metal",
+  "KIML (Kyungshin Industrial Motherson)",
+  "Motherson Polymer Solutions",
+  "Rising Stars Hi-Tech",
+  "WOWTEK Mobile Hardware",
+];
+
 export default function AboutHeroSection() {
-  const root = useRef<HTMLElement>(null);
-  const [activeTab, setActiveTab] = useState(0);
+  const root = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
 
-      tl.fromTo(
-        ".about-hero-breadcrumb",
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, delay: 0.1 }
-      )
+      tl
         .fromTo(
-          ".about-hero-eyebrow",
-          { scale: 0.85, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.8 },
-          "-=0.6"
+          ".about-light-breadcrumb",
+          { y: -15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, delay: 0.1 }
         )
         .fromTo(
-          ".about-hero-title-line",
-          { y: 60, opacity: 0, rotateX: 20 },
-          { y: 0, opacity: 1, rotateX: 0, duration: 1.1, stagger: 0.15 },
-          "-=0.6"
+          ".hero-light-badge",
+          { scale: 0.9, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.7 },
+          "-=0.4"
         )
         .fromTo(
-          ".about-hero-lede",
-          { y: 35, opacity: 0 },
+          ".hero-light-h1",
+          { y: 40, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.9 },
-          "-=0.7"
-        )
-        .fromTo(
-          ".about-hero-actions",
-          { y: 25, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          "-=0.7"
-        )
-        .fromTo(
-          ".about-hero-proof > div",
-          { y: 30, opacity: 0, scale: 0.85 },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.08,
-            ease: "back.out(2)",
-          },
           "-=0.5"
         )
         .fromTo(
-          ".about-hero-deck",
-          {
-            x: 90,
-            opacity: 0,
-            scale: 0.88,
-            rotateY: 12,
-            filter: "blur(12px)",
-          },
-          {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            rotateY: 0,
-            filter: "blur(0px)",
-            duration: 1.4,
-            ease: "power4.out",
-          },
-          "-=1.3"
-        )
-        .fromTo(
-          ".about-hero-badge-float",
-          { scale: 0, opacity: 0, y: 25 },
-          {
-            scale: 1,
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "back.out(2.5)",
-          },
-          "-=0.8"
-        )
-        .fromTo(
-          ".about-hero-ticker",
+          ".hero-light-sub",
           { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" },
+          { y: 0, opacity: 1, duration: 0.8 },
+          "-=0.6"
+        )
+        .fromTo(
+          ".hero-light-stats",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
+          "-=0.55"
+        )
+        .fromTo(
+          ".hero-light-actions",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
           "-=0.5"
+        )
+        .fromTo(
+          ".hero-light-trust",
+          { y: 14, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          "-=0.45"
+        )
+        .fromTo(
+          ".hero-light-carousel",
+          { x: 60, opacity: 0, scale: 0.96 },
+          { x: 0, opacity: 1, scale: 1, duration: 1.1, ease: "power4.out" },
+          0.2
+        )
+        .fromTo(
+          ".hero-light-cred-card",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2)" },
+          "-=0.4"
         );
     }, root);
 
     return () => ctx.revert();
   }, []);
 
-  const cur = deckTabs[activeTab];
+  /* Auto-cycle slides */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % aboutSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section className="about-hero" ref={root} id="about-hero">
-      {/* 3D WebGL Constellation Canvas */}
-      <AboutCanvas />
-
-      {/* Cyber Mesh Grid Overlay */}
-      <div className="hero-mesh-grid" />
-
-      {/* Ambient Glowing Orbs */}
-      <div className="orb orb-a" />
-      <div className="orb orb-b" />
-      <div className="orb orb-c" />
-      <div className="orb orb-d" />
-
-      <div className="about-hero-container">
-        {/* TOP BREADCRUMBS */}
-        <div className="about-hero-breadcrumb">
-          <Link href="/" className="about-crumb-link">
-            <span>Home</span>
-          </Link>
-          <ChevronRight size={13} className="about-crumb-sep" />
-          <span className="about-crumb-active">About Raptor Staffing Solutions</span>
-        </div>
-
-        <div className="about-hero-split">
-          {/* LEFT COLUMN: Headings, Lede, Actions, Telemetry */}
-          <div className="about-hero-content">
-            <div className="about-hero-eyebrow">
-              <span className="hero-live-beacon" />
-              <Sparkles size={14} style={{ color: "#00f0ff" }} />
-              <span>THE INDUSTRIAL WORKFORCE ENGINE</span>
-              <span className="hero-eyebrow-divider">|</span>
-              <span className="hero-eyebrow-sub">TAMIL NADU MANUFACTURING CORRIDOR</span>
+    <div className="about-hero-wrapper" ref={root}>
+      <section className="hero-light about-hero-light" id="about-hero">
+        <div className="hero-light-container">
+          {/* LEFT COPY */}
+          <div className="hero-light-copy">
+            {/* Breadcrumb */}
+            <div className="about-light-breadcrumb">
+              <Link href="/" className="about-light-crumb-link">
+                Home
+              </Link>
+              <ChevronRight size={13} className="about-light-crumb-sep" />
+              <span className="about-light-crumb-active">About Raptor Staffing Solutions</span>
             </div>
 
-            <h1 className="about-hero-h1">
-              <span className="about-hero-title-line">ENGINEERING TAMIL NADU&apos;S</span>
-              <span className="about-hero-title-line gradient-text">
-                MANUFACTURING MIGHT.
-              </span>
+            {/* Badge */}
+            <div className="hero-light-badge">
+              <span className="hero-light-dot" />
+              Tamil Nadu&apos;s Industrial Workforce Engine • Kanchipuram HQ
+            </div>
+
+            {/* Heading */}
+            <h1 className="hero-light-h1">
+              Engineering Tamil Nadu&apos;s
+              <span className="hero-light-accent"> Manufacturing Might</span>
             </h1>
 
-            <p className="about-hero-lede">
-              Founded in Kanchipuram, Raptor Staffing Solutions is the premier
-              operational partner for global OEMs and Tier-1 manufacturing plants
-              across Sriperumbudur, Oragadam, and Sunguvarchatram. We eliminate
-              workforce shortages with <strong>3,064+ verified operators</strong>,
-              guaranteed <strong>100% PF &amp; ESI statutory immunity</strong>, and
-              a rapid <strong>24–72 hour mobilisation SLA</strong>.
+            {/* Lede */}
+            <p className="hero-light-sub">
+              Founded in Kanchipuram, Raptor Staffing Solutions is the premier operational partner for global OEMs and Tier-1 manufacturing plants across Sriperumbudur, Oragadam, and Sunguvarchatram — delivering zero-cost employer hiring with guaranteed 100% PF &amp; ESI statutory compliance and rapid 24–72 hour mobilisation.
             </p>
 
-            <div className="about-hero-actions">
-              <Link href="/contact" className="hero-primary-cta">
-                <span>Request Manpower Proposal</span>
-                <ArrowRight size={18} />
-              </Link>
-              <Link href="/services" className="hero-secondary-cta">
-                <Zap size={16} color="#00f0ff" />
-                <span>Explore Plant Services</span>
-              </Link>
-              <div className="hero-sla-pill">
-                <ShieldCheck size={15} color="#10b981" />
-                <span>Zero Employer Fee • 100% Legal Immunity</span>
+            {/* Stats row */}
+            <div className="hero-light-stats">
+              <div className="hero-light-stat">
+                <strong><AnimatedCounter end={3064} suffix="+" /></strong>
+                <span className="hero-light-stat-label">Active Workers</span>
+              </div>
+              <div className="hero-light-stat-divider" />
+              <div className="hero-light-stat">
+                <strong>100%</strong>
+                <span className="hero-light-stat-label">Statutory Cover</span>
+              </div>
+              <div className="hero-light-stat-divider" />
+              <div className="hero-light-stat">
+                <strong><AnimatedCounter end={19} suffix="" /></strong>
+                <span className="hero-light-stat-label">Districts (TN)</span>
+              </div>
+              <div className="hero-light-stat-divider" />
+              <div className="hero-light-stat">
+                <strong><AnimatedCounter end={81} suffix="+" /></strong>
+                <span className="hero-light-stat-label">College Partners</span>
               </div>
             </div>
 
-            {/* 4 Telemetry Capsules */}
-            <div className="about-hero-proof">
-              <div className="about-proof-item">
-                <strong className="about-proof-val" style={{ color: "#00f0ff" }}>
-                  <AnimatedCounter end={3064} suffix="+" />
-                </strong>
-                <span className="about-proof-lbl">Deployed Workforce</span>
-                <span className="about-proof-sub">Active in SIPCOT corridors</span>
-              </div>
+            {/* Actions */}
+            <div className="hero-light-actions">
+              <Link href="/contact" className="hero-light-cta-primary">
+                Request Manpower Proposal
+                <ArrowRight size={17} />
+              </Link>
+              <Link href="/services" className="hero-light-cta-secondary">
+                Explore Plant Services
+              </Link>
+            </div>
 
-              <div className="about-proof-item">
-                <strong className="about-proof-val" style={{ color: "#10b981" }}>
-                  <AnimatedCounter end={100} suffix="%" />
-                </strong>
-                <span className="about-proof-lbl">Statutory Compliance</span>
-                <span className="about-proof-sub">PF, ESI, CLRA &amp; 240-day audit</span>
-              </div>
-
-              <div className="about-proof-item">
-                <strong className="about-proof-val" style={{ color: "#a855f7" }}>
-                  <AnimatedCounter end={19} suffix=" Districts" />
-                </strong>
-                <span className="about-proof-lbl">Tamil Nadu Sourcing</span>
-                <span className="about-proof-sub">Deep grassroots network</span>
-              </div>
-
-              <div className="about-proof-item">
-                <strong className="about-proof-val" style={{ color: "#f15ca4" }}>
-                  <AnimatedCounter end={81} suffix="+" />
-                </strong>
-                <span className="about-proof-lbl">College Tie-ups</span>
-                <span className="about-proof-sub">ITI, Diploma &amp; Graduates</span>
-              </div>
+            {/* Trust strip */}
+            <div className="hero-light-trust">
+              <span className="hero-light-trust-label">Trusted by</span>
+              {["Bharat FIH", "KYOWA Aluminium", "KIML Motherson", "Rising Stars"].map((name) => (
+                <span key={name} className="hero-light-trust-pill">{name}</span>
+              ))}
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Futuristic Enterprise Console & Switcher */}
-          <div className="about-hero-deck-wrap">
-            {/* FLOATING BADGE 1: Statutory Compliance (Top Right) */}
-            <div className="about-hero-badge-float badge-top-right">
-              <div className="badge-float-icon" style={{ background: "rgba(16, 185, 129, 0.2)", borderColor: "rgba(16, 185, 129, 0.4)" }}>
-                <ShieldCheck size={20} color="#10b981" />
-              </div>
-              <div className="badge-float-text">
-                <strong>100% Statutory Compliant</strong>
-                <span>PF, ESI, CLRA &amp; Factory Act</span>
-              </div>
-            </div>
-
-            {/* FLOATING BADGE 2: Tier-1 Trusted (Bottom Left) */}
-            <div className="about-hero-badge-float badge-bottom-left">
-              <div className="badge-float-icon" style={{ background: "rgba(0, 240, 255, 0.2)", borderColor: "rgba(0, 240, 255, 0.4)" }}>
-                <Factory size={20} color="#00f0ff" />
-              </div>
-              <div className="badge-float-text">
-                <strong>Fortune 500 Trusted</strong>
-                <span>Bharat FIH • Motherson • KYOWA</span>
-              </div>
-            </div>
-
-            {/* FLOATING BADGE 3: Rapid SLA (Middle Right) */}
-            <div className="about-hero-badge-float badge-mid-right">
-              <div className="badge-float-icon" style={{ background: "rgba(241, 92, 164, 0.2)", borderColor: "rgba(241, 92, 164, 0.4)" }}>
-                <Clock size={19} color="#f15ca4" />
-              </div>
-              <div className="badge-float-text">
-                <strong>24–72h Mobilisation</strong>
-                <span>Rapid Plant Deployment</span>
-              </div>
-            </div>
-
-            {/* INTERACTIVE COMMAND DECK CARD */}
-            <div className="about-hero-deck">
-              {/* HUD Brackets */}
-              <div className="hero-hud-bracket hud-top-left" />
-              <div className="hero-hud-bracket hud-top-right" />
-              <div className="hero-hud-bracket hud-bottom-left" />
-              <div className="hero-hud-bracket hud-bottom-right" />
-
-              {/* Console Header Bar */}
-              <div className="about-deck-hud-header">
-                <div className="hud-header-left">
-                  <span className="hud-signal-dot" />
-                  <span className="hud-code-title">RAPTOR_CORP_INFRASTRUCTURE // v2.6</span>
-                </div>
-                <div className="hud-header-right">
-                  <span className="hud-tag">STATUS: 100% OPERATIONAL</span>
-                  <span className="hud-tag hud-tag-location">KANCHIPURAM • SIPCOT</span>
-                </div>
-              </div>
-
-              {/* Tab Selector Buttons */}
-              <div className="about-deck-tabs">
-                {deckTabs.map((tab, idx) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(idx)}
-                    className={`about-deck-tab-btn ${activeTab === idx ? "active" : ""}`}
-                    type="button"
-                  >
-                    <span>{tab.tabLabel}</span>
-                    {activeTab === idx && <div className="tab-active-glow" />}
-                  </button>
-                ))}
-              </div>
-
-              {/* Main Deck Image Showcase */}
-              <div className="about-deck-media-wrap">
+          {/* RIGHT CAROUSEL */}
+          <div className="hero-light-carousel">
+            {/* Image slides */}
+            <div className="hero-light-img-wrap">
+              {aboutSlides.map((slide, idx) => (
                 <Image
-                  src={cur.image}
-                  alt={cur.alt}
-                  width={680}
-                  height={380}
-                  className="about-deck-img"
-                  priority
+                  key={slide.id}
+                  src={slide.image}
+                  alt={slide.title}
+                  width={900}
+                  height={600}
+                  priority={idx === 0}
+                  className={`hero-light-img ${activeSlide === idx ? "active" : ""}`}
                 />
-                <div className="about-deck-media-overlay" />
-                <div className="about-deck-media-tag">
-                  <Sparkles size={13} color="#00f0ff" />
-                  <span>{cur.tagline}</span>
-                </div>
-              </div>
+              ))}
 
-              {/* Deck Details & Telemetry */}
-              <div className="about-deck-body">
-                <h3 className="about-deck-title">{cur.title}</h3>
-                <p className="about-deck-desc">{cur.desc}</p>
-
-                {/* Micro Telemetry Bar */}
-                <div className="about-deck-stats-grid">
-                  {cur.stats.map((st, i) => (
-                    <div key={i} className="about-deck-stat-box">
-                      <span className="stat-label">{st.label}</span>
-                      <strong className="stat-value" style={{ color: st.color }}>
-                        {st.val}
-                      </strong>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Feature Checklist */}
-                <div className="about-deck-features">
-                  {cur.features.map((feat, i) => (
-                    <div key={i} className="about-deck-feature-row">
-                      <CheckCircle2 size={16} color="#00f0ff" className="feat-check" />
-                      <span>{feat}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Console Footer */}
-              <div className="about-deck-footer">
-                <span className="footer-status">
-                  <span className="live-ping" />
-                  Continuous On-Site Supervision Across Tamil Nadu
+              {/* Caption overlay */}
+              <div className="hero-light-caption">
+                <span className="hero-light-caption-label">{aboutSlides[activeSlide].label}</span>
+                <strong className="hero-light-caption-title">{aboutSlides[activeSlide].title}</strong>
+                <p className="hero-light-caption-desc">{aboutSlides[activeSlide].desc}</p>
+                <span className="hero-light-caption-stat">
+                  <ShieldCheck size={14} />{aboutSlides[activeSlide].stat}
                 </span>
-                <Link href="/about#leadership" className="footer-action">
-                  <span>Leadership Team</span>
-                  <ArrowUpRight size={14} />
-                </Link>
+              </div>
+            </div>
+
+            {/* Slide dots */}
+            <div className="hero-light-dots">
+              {aboutSlides.map((slide, idx) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  id={`about-hero-dot-${idx}`}
+                  className={`hero-light-dot-btn ${activeSlide === idx ? "active" : ""}`}
+                  onClick={() => setActiveSlide(idx)}
+                  aria-label={`View slide: ${slide.title}`}
+                />
+              ))}
+            </div>
+
+            {/* Floating credential card */}
+            <div className="hero-light-cred-card">
+              <BadgeCheck size={18} color="#1d4ed8" />
+              <div>
+                <strong>Zero Employer Fees</strong>
+                <span>100% PF, ESI &amp; CLRA Compliant</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* BOTTOM ENTERPRISE OEM CLIENT TICKER */}
-      <div className="about-hero-ticker">
-        <div className="ticker-label-box">
-          <Factory size={14} color="#00f0ff" />
-          <span>PROVEN PARTNER TO INDUSTRY LEADERS</span>
-        </div>
-        <div className="ticker-strip-wrapper">
-          <div className="ticker-strip">
-            {[
-              "Bharat FIH (Foxconn Group)",
-              "KYOWA Aluminium Metal",
-              "KIML (Kyungshin Industrial Motherson)",
-              "Motherson Polymer Solutions",
-              "Rising Stars Hi-Tech",
-              "WOWTEK Mobile Hardware",
-              "SIPCOT Phase-II Sunguvarchatram",
-              "Oragadam Industrial Growth Center",
-              "Sriperumbudur Vallam Vadagal",
-              "100% PF & ESI Statutory Compliance",
-              "Bharat FIH (Foxconn Group)",
-              "KYOWA Aluminium Metal",
-              "KIML (Kyungshin Industrial Motherson)",
-              "Motherson Polymer Solutions",
-              "Rising Stars Hi-Tech",
-              "WOWTEK Mobile Hardware",
-            ].map((partner, index) => (
-              <div key={index} className="ticker-item">
-                <span className="ticker-dot" />
-                <span className="ticker-text">{partner}</span>
-              </div>
-            ))}
+      {/* Light OEM Partner Ticker */}
+      <div className="about-light-ticker">
+        <div className="about-light-ticker-inner">
+          <div className="about-light-ticker-label">
+            <Building2 size={14} />
+            <span>Trusted Industry Partners</span>
+          </div>
+          <div className="about-light-ticker-mask">
+            <div className="about-light-ticker-strip">
+              {partners.map((partner, index) => (
+                <div key={index} className="about-light-ticker-item">
+                  <span className="about-light-ticker-dot" />
+                  <span>{partner}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

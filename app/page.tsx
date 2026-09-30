@@ -389,22 +389,22 @@ export default function Home() {
             <div className="hero-light-stats">
               <div className="hero-light-stat">
                 <strong><AnimatedCounter end={3064} suffix="+" /></strong>
-                <span>Active Workers</span>
+                <span className="hero-light-stat-label">Active Workers</span>
               </div>
               <div className="hero-light-stat-divider" />
               <div className="hero-light-stat">
                 <strong><AnimatedCounter end={81} suffix="+" /></strong>
-                <span>College Partners</span>
+                <span className="hero-light-stat-label">College Partners</span>
               </div>
               <div className="hero-light-stat-divider" />
               <div className="hero-light-stat">
                 <strong>100%</strong>
-                <span>Statutory Cover</span>
+                <span className="hero-light-stat-label">Statutory Cover</span>
               </div>
               <div className="hero-light-stat-divider" />
               <div className="hero-light-stat">
                 <strong>24–72h</strong>
-                <span>Deployment SLA</span>
+                <span className="hero-light-stat-label">Deployment SLA</span>
               </div>
             </div>
 
@@ -573,8 +573,8 @@ export default function Home() {
             <Factory size={14} /> SIPCOT Industrial Footprint
           </span>
           <h2>
-            Anchored in Tamil Nadu's<br />
-            <em style={{ color: "#34cddd", fontStyle: "italic", fontFamily: "Georgia, serif" }}>Manufacturing Epicenter</em>
+            Anchored in Tamil Nadu&apos;s<br />
+            <span className="immersive-accent">Manufacturing Epicenter</span>
           </h2>
           <p>
             Operating directly within Sriperumbudur, Oragadam, Sunguvarchatram, and Kanchipuram manufacturing hubs with immediate local response and 24–72 hour replacement SLAs.
@@ -657,10 +657,10 @@ export default function Home() {
               <span style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#a5f3fc", fontWeight: 800 }}>
                 Estimated Deployment Window
               </span>
-              <div style={{ fontSize: "40px", fontWeight: 900, color: "#fff", margin: "10px 0 6px" }}>
+              <div style={{ fontSize: "28px", fontWeight: 800, color: "#fff", margin: "8px 0 6px", letterSpacing: "-0.02em" }}>
                 {getDeploymentTime()}
               </div>
-              <p style={{ fontSize: "13px", color: "#e0f2fe", lineHeight: 1.5, margin: "0 0 20px" }}>
+              <p style={{ fontSize: "12.5px", color: "#e0f2fe", lineHeight: 1.5, margin: "0 0 18px" }}>
                 Customized for <strong>{selectedCount}</strong> in <strong>{selectedRole}</strong> across <strong>{selectedShift}</strong>.
               </p>
 
@@ -707,7 +707,7 @@ export default function Home() {
                   {c.name[0]}
                 </div>
                 <div>
-                  <div className="client-name" style={{ fontSize: "17px" }}>{c.name}</div>
+                  <div className="client-name">{c.name}</div>
                   <div className="client-sub">{c.sub}</div>
                 </div>
               </div>
@@ -829,54 +829,6 @@ export default function Home() {
               <ShieldCheck size={15} color="#10b981" />
               <span><strong>100%</strong> Pre-Screened & Compliant</span>
             </span>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ CALL TO ACTION ═══════════════ */}
-      <section className="cta-section">
-        <div className="cta-panel reveal">
-          <div>
-            <div className="section-label light">Build Your Workforce With Us</div>
-            <h2>Ready for a staffing partner who keeps your lines moving?</h2>
-            <p className="cta-desc">
-              Contact our Kanchipuram head office or Sunguvarchatram industrial branch for a tailored manpower proposal within 24 hours.
-            </p>
-          </div>
-          <div className="cta-actions">
-            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-              <Link href="/contact" className="light-btn">
-                <span>Send Manpower Brief</span>
-                <ArrowRight size={18} />
-              </Link>
-              <Link
-                href="/process"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.4)",
-                  padding: "14px 20px",
-                  borderRadius: "15px",
-                  fontWeight: 700,
-                  fontSize: "14px",
-                }}
-              >
-                <span>Our Hiring Process</span>
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-            <div style={{ marginTop: "14px" }}>
-              <p>
-                <Building2 size={18} style={{ flexShrink: 0 }} />
-                <span>Head Office: No. 6, First Floor, Gandhi Road, Kanchipuram – 631501</span>
-              </p>
-              <p style={{ marginTop: "8px" }}>
-                <MapPin size={18} style={{ flexShrink: 0 }} />
-                <span>Branch: No.365/2C, Vijay Complex (F02), Walajabad Road, Sunguvarchatram – 602106</span>
-              </p>
-            </div>
           </div>
         </div>
       </section>

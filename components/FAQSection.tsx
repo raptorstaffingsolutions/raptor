@@ -264,7 +264,7 @@ export default function FAQSection() {
           {/* Quick Assurance Badges */}
           <div className="faq-quick-stats">
             <div className="faq-stat-chip">
-              <ShieldCheck size={14} color="#00f0ff" />
+              <ShieldCheck size={14} color="#7c3aed" />
               <span>100% Statutory Immunity</span>
             </div>
             <div className="faq-stat-chip">
@@ -400,7 +400,7 @@ export default function FAQSection() {
 
                         {/* Executive Highlight Pill */}
                         <div className="faq-takeaway-box">
-                          <CheckCircle2 size={16} color="#00f0ff" className="faq-takeaway-icon" />
+                          <CheckCircle2 size={16} color="#7c3aed" className="faq-takeaway-icon" />
                           <div className="faq-takeaway-content">
                             <span className="faq-takeaway-label">Key Takeaway & Assurance</span>
                             <strong className="faq-takeaway-value">{faq.takeaway}</strong>
@@ -452,7 +452,7 @@ export default function FAQSection() {
 
               <div className="faq-concierge-top">
                 <div className="faq-concierge-icon-disc">
-                  <MessageSquare size={24} color="#00f0ff" />
+                  <MessageSquare size={24} color="#7c3aed" />
                 </div>
                 <span className="faq-concierge-badge">DIRECT ASSISTANCE</span>
               </div>
@@ -501,7 +501,7 @@ export default function FAQSection() {
               </div>
 
               <div className="faq-concierge-sla">
-                <Clock size={16} color="#00f0ff" />
+                <Clock size={16} color="#059669" />
                 <span>
                   <strong>Guaranteed SLA: </strong>
                   Inquiries acknowledged within 4 business hours.

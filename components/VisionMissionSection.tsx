@@ -104,22 +104,22 @@ export default function VisionMissionSection() {
 
   const coreValues = [
     {
-      icon: <ShieldCheck size={20} color="#34cddd" />,
+      icon: <ShieldCheck size={20} color="#7c3aed" />,
       title: "100% Legal Integrity",
       desc: "Zero-compromise statutory compliance covering PF, ESI, and labour department audits.",
     },
     {
-      icon: <Zap size={20} color="#f15ca4" />,
+      icon: <Zap size={20} color="#db2777" />,
       title: "Operational Velocity",
       desc: "Guaranteed 24–72 hour deployment SLAs tailored to high-demand factory schedules.",
     },
     {
-      icon: <HeartHandshake size={20} color="#facc15" />,
+      icon: <HeartHandshake size={20} color="#d97706" />,
       title: "Worker Dignity & Care",
       desc: "Hygienic hostels, transparent payroll, and welfare management ensuring high worker retention.",
     },
     {
-      icon: <TrendingUp size={20} color="#a78bfa" />,
+      icon: <TrendingUp size={20} color="#9333ea" />,
       title: "Uptime-Driven Quality",
       desc: "Pre-screened, verified, and medical-cleared operators protecting daily plant output.",
     },
@@ -127,7 +127,7 @@ export default function VisionMissionSection() {
 
   return (
     <section className="vm-section" ref={sectionRef} id="vision-mission">
-      {/* Decorative Cosmic Lighting Orbs */}
+      {/* Decorative Subtle Ambient Lighting Orbs */}
       <div className="vm-orb vm-orb-violet" aria-hidden="true" />
       <div className="vm-orb vm-orb-cyan" aria-hidden="true" />
       <div className="vm-orb vm-orb-pink" aria-hidden="true" />
@@ -180,15 +180,15 @@ export default function VisionMissionSection() {
               <span className="vm-pillars-title">Key Strategic Focus Areas:</span>
               <div className="vm-pillars-wrap">
                 <span className="vm-pillar-pill">
-                  <CheckCircle2 size={13} color="#80edf2" />
+                  <CheckCircle2 size={13} color="#7c3aed" />
                   <span>Standardized Operator Sourcing</span>
                 </span>
                 <span className="vm-pillar-pill">
-                  <CheckCircle2 size={13} color="#80edf2" />
+                  <CheckCircle2 size={13} color="#7c3aed" />
                   <span>Zero Assembly Line Downtime</span>
                 </span>
                 <span className="vm-pillar-pill">
-                  <CheckCircle2 size={13} color="#80edf2" />
+                  <CheckCircle2 size={13} color="#7c3aed" />
                   <span>Interstate Talent Scalability</span>
                 </span>
               </div>
@@ -235,15 +235,15 @@ export default function VisionMissionSection() {
               <span className="vm-pillars-title">Core Execution Commitments:</span>
               <div className="vm-pillars-wrap">
                 <span className="vm-pillar-pill">
-                  <CheckCircle2 size={13} color="#fca5a5" />
+                  <CheckCircle2 size={13} color="#db2777" />
                   <span>Statutory PF, ESI &amp; CLRA Audited</span>
                 </span>
                 <span className="vm-pillar-pill">
-                  <CheckCircle2 size={13} color="#fca5a5" />
+                  <CheckCircle2 size={13} color="#db2777" />
                   <span>24–72h Rapid Turnaround SLA</span>
                 </span>
                 <span className="vm-pillar-pill">
-                  <CheckCircle2 size={13} color="#fca5a5" />
+                  <CheckCircle2 size={13} color="#db2777" />
                   <span>Complete Hostel &amp; Welfare Care</span>
                 </span>
               </div>

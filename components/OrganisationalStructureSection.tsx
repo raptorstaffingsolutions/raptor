@@ -122,7 +122,7 @@ export default function OrganisationalStructureSection() {
       title: "Sourcing & Field Mobilisation",
       subtitle: "District & Interstate Talent Pipeline",
       accent: "cyan",
-      icon: <Users2 size={24} color="#34cddd" />,
+      icon: <Users2 size={24} color="#7c3aed" />,
       badge: "19 Districts & 5 Migration States",
       colorGradient: "linear-gradient(135deg, #0c8ca4 0%, #34cddd 100%)",
       leadTitle: "Sourcing Operations Head",
@@ -141,7 +141,7 @@ export default function OrganisationalStructureSection() {
       title: "HR Operations & Compliance",
       subtitle: "Audited Welfare, Safety & Governance",
       accent: "pink",
-      icon: <ShieldCheck size={24} color="#f15ca4" />,
+      icon: <ShieldCheck size={24} color="#db2777" />,
       badge: "100% Audited Legal Integrity",
       colorGradient: "linear-gradient(135deg, #f15ca4 0%, #f59e0b 100%)",
       leadTitle: "HR & Compliance Manager",
@@ -160,7 +160,7 @@ export default function OrganisationalStructureSection() {
       title: "Business Development & Client Relations",
       subtitle: "Tier-1 OEM Partnerships & SLA Governance",
       accent: "violet",
-      icon: <Building2 size={24} color="#a78bfa" />,
+      icon: <Building2 size={24} color="#9333ea" />,
       badge: "Tier-1 SIPCOT Manufacturers",
       colorGradient: "linear-gradient(135deg, #6d50ec 0%, #818cf8 100%)",
       leadTitle: "BD & Key Account Manager",
@@ -205,7 +205,7 @@ export default function OrganisationalStructureSection() {
           <div className="org-level-wrap">
             <div className="org-exec-node org-node-proprietor">
               <div className="org-exec-crown">
-                <Crown size={18} color="#facc15" />
+                <Crown size={18} color="#d97706" />
               </div>
               <div className="org-exec-content">
                 <span className="org-exec-badge">Executive Command</span>
@@ -228,7 +228,7 @@ export default function OrganisationalStructureSection() {
           <div className="org-level-wrap">
             <div className="org-exec-node org-node-gm">
               <div className="org-exec-icon-pod">
-                <GitBranch size={18} color="#34cddd" />
+                <GitBranch size={18} color="#7c3aed" />
               </div>
               <div className="org-exec-content">
                 <span className="org-exec-badge gm-badge">Operational Governance</span>
@@ -315,28 +315,28 @@ export default function OrganisationalStructureSection() {
           </div>
           <div className="org-sla-grid">
             <div className="org-sla-pill">
-              <Clock size={18} color="#34cddd" />
+              <Clock size={18} color="#7c3aed" />
               <div>
                 <strong>24–72h Turnaround</strong>
                 <span>Rapid Candidate Mobilisation</span>
               </div>
             </div>
             <div className="org-sla-pill">
-              <ShieldCheck size={18} color="#f15ca4" />
+              <ShieldCheck size={18} color="#db2777" />
               <div>
                 <strong>100% Statutory Audits</strong>
                 <span>PF, ESI &amp; CLRA Full Filing</span>
               </div>
             </div>
             <div className="org-sla-pill">
-              <Zap size={18} color="#facc15" />
+              <Zap size={18} color="#d97706" />
               <div>
                 <strong>Zero Shift Disruptions</strong>
                 <span>Dedicated Buffer Pool Sourcing</span>
               </div>
             </div>
             <div className="org-sla-pill">
-              <Award size={18} color="#a78bfa" />
+              <Award size={18} color="#9333ea" />
               <div>
                 <strong>Single-Window POC</strong>
                 <span>Direct Executive Accountability</span>

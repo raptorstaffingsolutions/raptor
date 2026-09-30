@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import NetworkHeroSection from "@/components/NetworkHeroSection";
-import CTASection from "@/components/CTASection";
 import { ArrowRight, GraduationCap, Map, MapPin, Users } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -312,12 +311,6 @@ export default function NetworkPage() {
           ))}
         </div>
       </section>
-
-      <CTASection
-        title="Need manpower from a specific district or state?"
-        subtitle="Share your requirements — district preference, skill category, headcount — and we'll match from our live database."
-        tagline="Access Our Talent Network"
-      />
     </main>
   );
 }
